@@ -20,7 +20,7 @@ const storyParts = [
 
 export function OurStorySection() {
   return (
-    <section id="our-story" className="py-16 md:py-24 bg-card/50">
+    <section id="our-story" className="py-16 md:py-24 bg-card">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center mb-12">
           <h2 className="font-bold text-4xl md:text-5xl">A Fonte de Nossa Alegria</h2>

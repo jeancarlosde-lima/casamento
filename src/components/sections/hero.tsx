@@ -1,7 +1,7 @@
 
 export function HeroSection() {
   return (
-    <section id="hero" className="relative min-h-[80vh] flex items-center justify-center text-center bg-gradient-to-br from-background to-card/50 py-20">
+    <section id="hero" className="relative min-h-[100vh] flex items-center justify-center text-center bg-gradient-to-br from-background to-card py-20">
       <div className="relative z-10 p-4 animate-fade-in container">
         <p className="text-lg md:text-xl text-muted-foreground uppercase tracking-wider mb-4">
             Convite de casamento de:

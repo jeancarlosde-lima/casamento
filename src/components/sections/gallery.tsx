@@ -20,12 +20,12 @@ const galleryItems2 = [
 ]
 
 function GalleryRow({ items, reverse = false }: { items: { text: string, hint: string }[], reverse?: boolean }) {
-    const allItems = [...items, ...items]; // Duplicate for seamless loop
+    const allItems = [...items, ...items];
 
     return (
         <div className={`flex gap-4 md:gap-8 animate-scroll-horizontal ${reverse ? 'flex-row-reverse' : ''}`}>
             {allItems.map((item, index) => (
-                <div key={index} className="relative flex-shrink-0 w-[250px] h-[320px] md:w-[300px] md:h-[400px] rounded-2xl overflow-hidden group">
+                <div key={index} className="relative flex-shrink-0 w-[250px] h-[320px] md:w-[300px] md:h-[400px] rounded-2xl overflow-hidden group transition-transform duration-300 hover:scale-105">
                     <Image
                         src={`https://placehold.co/400x500.png`}
                         alt={item.text}
@@ -35,8 +35,8 @@ function GalleryRow({ items, reverse = false }: { items: { text: string, hint: s
                         className="transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-300" />
-                    <div className="absolute bottom-0 left-0 p-4">
-                        <p className="text-white font-medium">{item.text}</p>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <p className="text-white text-lg font-medium text-center p-4">{item.text}</p>
                     </div>
                 </div>
             ))}
@@ -44,11 +44,10 @@ function GalleryRow({ items, reverse = false }: { items: { text: string, hint: s
     );
 }
 
-
 export function GallerySection() {
     return (
-        <section id="gallery" className="py-16 md:py-24 bg-card/50 overflow-hidden">
-            <div className="space-y-8">
+        <section id="gallery" className="py-16 md:py-24 bg-card overflow-hidden">
+            <div className="space-y-8 group">
                 <GalleryRow items={galleryItems} />
                 <GalleryRow items={galleryItems2} reverse />
             </div>

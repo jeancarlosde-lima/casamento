@@ -1,6 +1,5 @@
-
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Church, MapPin, PartyPopper } from 'lucide-react';
 
 const eventDetails = [
@@ -25,14 +24,14 @@ export function EventDetailsSection() {
     <section id="event-details" className="py-16 md:py-24 bg-background">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center mb-12">
-          <h2 className="font-bold text-4xl md:text-5xl">O Casamento</h2>
+          <h2 className="font-bold text-4xl md:text-5xl text-foreground">O Casamento</h2>
           <p className="mt-4 text-muted-foreground text-lg">
             Sábado, 10 de Outubro de 2026
           </p>
         </div>
         <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
           {eventDetails.map((detail) => (
-            <Card key={detail.title} className="text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-t-4 border-t-primary">
+            <Card key={detail.title} className="text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-t-4 border-t-primary rounded-3xl">
               <CardHeader className="items-center gap-4">
                 {detail.icon}
                 <CardTitle className="font-semibold text-3xl">{detail.title}</CardTitle>
@@ -42,7 +41,7 @@ export function EventDetailsSection() {
                 <div className="bg-primary/10 p-4 rounded-lg text-sm text-foreground font-medium">
                   {detail.address}
                 </div>
-                 <Button asChild size="lg" variant="outline">
+                 <Button asChild size="lg" variant="outline" className="rounded-full">
                     <a href={detail.mapLink} target="_blank" rel="noopener noreferrer">
                       <MapPin className="mr-2 h-4 w-4" />
                       Ver no mapa
