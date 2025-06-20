@@ -117,3 +117,48 @@ html {
     right: 5%;
     animation-delay: -10s;
 }
+
+/* Embla Carousel Styles */
+.embla {
+  position: relative;
+}
+.embla__viewport {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.embla__slide {
+  flex: 0 0 50%;
+  min-width: 0;
+  padding-left: 1rem;
+}
+@media (min-width: 768px) {
+  .embla__slide {
+    flex: 0 0 33.3333%;
+  }
+}
+@media (min-width: 1024px) {
+  .embla__slide {
+    flex: 0 0 25%;
+  }
+}
+
+.embla__button {
+    @apply h-12 w-12 rounded-full bg-background/50 backdrop-blur-sm text-primary shadow-lg absolute top-1/2 -translate-y-1/2 flex items-center justify-center transition-all opacity-0 group-hover/gallery:opacity-100 disabled:opacity-30 disabled:cursor-not-allowed;
+}
+.embla__button:not(:disabled):hover {
+    @apply bg-background/80 scale-105;
+}
+
+.embla__button--prev {
+    @apply left-4;
+}
+
+.embla__button--next {
+    @apply right-4;
+}
