@@ -45,11 +45,9 @@ function GalleryRow({ items, reverse = false }: { items: { text: string, hint: s
 
 export function GallerySection() {
     return (
-        <section id="gallery" className="py-16 md:py-24 bg-card overflow-hidden">
-            <div className="space-y-8 group">
-                <GalleryRow items={galleryItems} />
-                <GalleryRow items={galleryItems2} reverse />
-            </div>
-        </section>
+        <div className="space-y-8 group">
+            <GalleryRow items={galleryItems} />
+            <GalleryRow items={galleryItems2} reverse />
+        </div>
     );
 }

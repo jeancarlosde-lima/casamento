@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 
 export function HeroSection() {
   return (
@@ -6,7 +7,7 @@ export function HeroSection() {
         <p className="text-lg md:text-xl text-muted-foreground uppercase tracking-wider mb-4">
             Convite de casamento de:
         </p>
-        <h1 className="relative font-bold text-6xl md:text-8xl lg:text-9xl drop-shadow-lg text-primary leading-none">
+        <h1 className="font-display font-bold text-6xl md:text-8xl lg:text-9xl drop-shadow-lg text-primary leading-none">
           Eloisa & Jean
           <span className="absolute text-7xl md:text-9xl lg:text-[12rem] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10 -z-10">
             💍
@@ -18,6 +19,11 @@ export function HeroSection() {
         <p className="mt-8 text-base md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
           O amor conjugal é chamado a ser reflexo da perfeita unidade da Trindade: três Pessoas, um só Deus; dois corações, um só amor.
         </p>
+        <div className="mt-10">
+          <Button asChild size="lg" className="rounded-full shadow-lg hover:shadow-primary/40 transition-shadow">
+            <a href="#rsvp">Confirmar Presença</a>
+          </Button>
+        </div>
       </div>
     </section>
   );
