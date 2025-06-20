@@ -29,7 +29,7 @@ export default function Home() {
             </h2>
           </div>
         </AnimatedSection>
-        <AnimatedSection id="gallery" className="py-16 md:py-24 bg-card overflow-hidden">
+        <AnimatedSection id="gallery" className="py-16 md:py-24 bg-card">
           <GallerySection />
         </AnimatedSection>
         <AnimatedSection id="quote" className="py-16 md:py-24 bg-card">

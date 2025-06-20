@@ -99,10 +99,6 @@ export default {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
-        'scroll-horizontal': {
-          'from': { transform: 'translateX(0)' },
-          'to': { transform: 'translateX(-50%)' },
-        },
         'float': {
             '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
             '25%': { transform: 'translateY(-20px) rotate(2deg)' },
@@ -114,7 +110,6 @@ export default {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 1s ease-in-out',
-        'scroll-horizontal': 'scroll-horizontal 30s linear infinite',
         'float': 'float 20s ease-in-out infinite',
       },
     },
