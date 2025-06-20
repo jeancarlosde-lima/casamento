@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 
 export function HeroSection() {
   return (
@@ -7,13 +6,12 @@ export function HeroSection() {
       id="hero" 
       className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden"
     >
-      {/* Background Image */}
-      <Image
-        src="https://i.imgur.com/uG5G7x1.jpeg"
-        alt="Fundo artístico com a Santíssima Trindade"
-        fill
-        className="object-cover absolute inset-0 z-0"
-        priority
+      {/* Background Image - using CSS for robustness */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `url('https://i.imgur.com/uG5G7x1.jpeg')`,
+        }}
       />
       
       {/* Overlay to ensure text readability */}
