@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Toaster } from "@/components/ui/toaster";
 import './globals.css';
 import { cn } from '@/lib/utils';
-import { Playfair_Display, Alex_Brush } from 'next/font/google';
+import { Playfair_Display, Aboreto } from 'next/font/google';
 
 const sansFont = Playfair_Display({
   subsets: ['latin'],
@@ -10,7 +10,7 @@ const sansFont = Playfair_Display({
   variable: '--font-sans',
 });
 
-const displayFont = Alex_Brush({
+const displayFont = Aboreto({
   subsets: ['latin'],
   weight: ['400'],
   display: 'swap',
