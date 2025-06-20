@@ -40,7 +40,7 @@ export function EventDetailsSection() {
               <div className="bg-primary/10 p-4 rounded-lg text-sm text-foreground font-medium">
                 {detail.address}
               </div>
-               <Button asChild size="lg" variant="outline" className="rounded-full">
+               <Button asChild size="lg" className="rounded-full">
                   <a href={detail.mapLink} target="_blank" rel="noopener noreferrer">
                     <MapPin className="mr-2 h-4 w-4" />
                     Ver no mapa
