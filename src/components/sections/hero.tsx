@@ -1,4 +1,11 @@
 import { Button } from '@/components/ui/button';
+import { Great_Vibes } from 'next/font/google';
+
+const greatVibes = Great_Vibes({
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+});
 
 export function HeroSection() {
   return (
@@ -7,7 +14,7 @@ export function HeroSection() {
         <p className="text-lg md:text-xl text-muted-foreground uppercase tracking-wider mb-4">
             Convite de casamento de:
         </p>
-        <h1 className="font-display text-6xl md:text-8xl lg:text-[8.5rem] drop-shadow-lg text-primary leading-tight">
+        <h1 className={`${greatVibes.className} text-6xl sm:text-7xl md:text-8xl lg:text-9xl drop-shadow-lg text-primary leading-tight`}>
           Eloisa & Jean
         </h1>
         <p className="mt-8 text-xl md:text-2xl text-muted-foreground font-light italic">

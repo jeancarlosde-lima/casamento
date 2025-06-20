@@ -1,5 +1,6 @@
-import { Heart } from 'lucide-react';
+import { Heart, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 
 export default function PageHeader() {
   const navItems = [
@@ -12,11 +13,13 @@ export default function PageHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
-        <a href="#hero" className="flex items-center gap-2 mr-8">
+        <a href="#hero" className="flex items-center gap-2 mr-auto">
           <Heart className="h-6 w-6 text-primary" />
           <span className="font-display text-xl">E & J</span>
         </a>
-        <nav className="hidden md:flex items-center gap-6 text-sm">
+        
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-6 text-sm mr-6">
           {navItems.map((item) => (
             <a
               key={item.name}
@@ -27,10 +30,43 @@ export default function PageHeader() {
             </a>
           ))}
         </nav>
-        <div className="flex flex-1 items-center justify-end gap-2">
+        
+        <div className="hidden md:flex items-center justify-end gap-2">
           <Button asChild className="rounded-full">
             <a href="#rsvp">Confirmar Presença</a>
           </Button>
+        </div>
+
+        {/* Mobile Navigation */}
+        <div className="md:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="rounded-full">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Abrir menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right">
+                <a href="#hero" className="flex items-center gap-2 mb-12">
+                    <Heart className="h-6 w-6 text-primary" />
+                    <span className="font-display text-xl">E & J</span>
+                </a>
+              <nav className="flex flex-col gap-6 text-lg">
+                {navItems.map((item) => (
+                  <SheetClose asChild key={item.name}>
+                    <a href={item.href} className="text-foreground/80 hover:text-foreground -ml-4 pl-4 py-2 rounded-lg hover:bg-muted">
+                      {item.name}
+                    </a>
+                  </SheetClose>
+                ))}
+                <SheetClose asChild>
+                   <Button asChild className="rounded-full mt-4">
+                      <a href="#rsvp">Confirmar Presença</a>
+                    </Button>
+                </SheetClose>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
