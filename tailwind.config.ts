@@ -19,6 +19,7 @@ export default {
       fontFamily: {
         sans: ['var(--font-sans)', 'serif'],
         display: ['var(--font-display)', 'cursive'],
+        poppins: ['var(--font-poppins)', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
