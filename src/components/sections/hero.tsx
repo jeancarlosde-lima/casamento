@@ -7,17 +7,17 @@ export function HeroSection() {
       id="hero" 
       className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden"
     >
-      {/* Background Image with Blur */}
+      {/* Background Image */}
       <Image
         src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Andrei_Rublev_-_The_Old_Testament_Trinity_-_Google_Art_Project.jpg"
         alt="A Santíssima Trindade de Andrei Rublev"
         fill
-        className="object-cover absolute inset-0 z-0 filter blur-sm scale-105"
+        className="object-cover absolute inset-0 z-0"
         priority
       />
       
-      {/* Overlay */}
-      <div className="absolute inset-0 z-10 bg-black/60" />
+      {/* Overlay to ensure text readability */}
+      <div className="absolute inset-0 z-10 bg-black/50" />
 
       {/* Content */}
       <div className="relative z-20 p-4 animate-fade-in container">
