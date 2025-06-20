@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Toaster } from "@/components/ui/toaster";
 import './globals.css';
 import { cn } from '@/lib/utils';
-import { Inter, Playfair_Display } from 'next/font/google';
+import { Inter, Tangerine } from 'next/font/google';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -10,10 +10,11 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-const playfair = Playfair_Display({
+const displayFont = Tangerine({
   subsets: ['latin'],
+  weight: ['700'],
   display: 'swap',
-  variable: '--font-playfair',
+  variable: '--font-display',
 });
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="pt-BR" suppressHydrationWarning className={`${inter.variable} ${displayFont.variable}`}>
       <body className={cn("min-h-screen bg-background font-sans antialiased")}>
         {children}
         <Toaster />
