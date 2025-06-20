@@ -12,7 +12,7 @@ export function HeroSection() {
             className="object-cover"
             priority
          />
-         <div className="absolute inset-0 bg-background/70 backdrop-blur-sm" />
+         <div className="absolute inset-0 bg-background/50 backdrop-blur-sm" />
        </div>
       <div className="relative z-10 p-4 animate-fade-in container">
         <p className="text-lg md:text-xl text-foreground/80 uppercase tracking-wider mb-4">
