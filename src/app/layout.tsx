@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import { Toaster } from "@/components/ui/toaster";
 import './globals.css';
 import { cn } from '@/lib/utils';
-import { Inter, Tangerine } from 'next/font/google';
+import { Lora, Tangerine } from 'next/font/google';
 
-const inter = Inter({
+const lora = Lora({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-lora',
 });
 
 const displayFont = Tangerine({
@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning className={`${inter.variable} ${displayFont.variable}`}>
+    <html lang="pt-BR" suppressHydrationWarning className={`${lora.variable} ${displayFont.variable}`}>
       <body className={cn("min-h-screen bg-background font-sans antialiased")}>
         {children}
         <Toaster />
