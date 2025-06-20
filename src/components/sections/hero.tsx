@@ -2,17 +2,16 @@ import { Button } from '@/components/ui/button';
 
 export function HeroSection() {
   return (
-    <section id="hero" className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden">
-      {/* Background Image Container */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center blur-sm"
-        style={{
-          backgroundImage:
-            "url('https://upload.wikimedia.org/wikipedia/commons/a/a2/Andrei_Rublev_-_The_Old_Testament_Trinity_-_Google_Art_Project.jpg')",
-        }}
-      />
-      {/* Overlay */}
-      <div className="absolute inset-0 z-0 bg-black/50" />
+    <section 
+      id="hero" 
+      className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden bg-cover bg-center"
+      style={{
+        backgroundImage:
+          "url('https://upload.wikimedia.org/wikipedia/commons/a/a2/Andrei_Rublev_-_The_Old_Testament_Trinity_-_Google_Art_Project.jpg')",
+      }}
+    >
+      {/* Overlay with blur */}
+      <div className="absolute inset-0 z-0 bg-black/50 backdrop-blur-sm" />
 
       <div className="relative z-10 p-4 animate-fade-in container">
         <p className="text-lg md:text-xl text-white/80 uppercase tracking-wider mb-4">
