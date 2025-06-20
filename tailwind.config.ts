@@ -17,7 +17,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-lora)', 'serif'],
+        sans: ['var(--font-sans)', 'serif'],
         display: ['var(--font-display)', 'cursive'],
         code: ['monospace'],
       },

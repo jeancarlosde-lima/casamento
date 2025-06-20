@@ -2,15 +2,15 @@ import type { Metadata } from 'next';
 import { Toaster } from "@/components/ui/toaster";
 import './globals.css';
 import { cn } from '@/lib/utils';
-import { Lora, Great_Vibes } from 'next/font/google';
+import { Playfair_Display, Alex_Brush } from 'next/font/google';
 
-const lora = Lora({
+const sansFont = Playfair_Display({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-lora',
+  variable: '--font-sans',
 });
 
-const displayFont = Great_Vibes({
+const displayFont = Alex_Brush({
   subsets: ['latin'],
   weight: ['400'],
   display: 'swap',
@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning className={`${lora.variable} ${displayFont.variable}`}>
+    <html lang="pt-BR" suppressHydrationWarning className={`${sansFont.variable} ${displayFont.variable}`}>
       <body className={cn("min-h-screen bg-background font-sans antialiased")}>
         {children}
         <Toaster />
