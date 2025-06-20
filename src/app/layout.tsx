@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Toaster } from "@/components/ui/toaster";
 import './globals.css';
 import { cn } from '@/lib/utils';
-import { Lora, Tangerine } from 'next/font/google';
+import { Lora, Great_Vibes } from 'next/font/google';
 
 const lora = Lora({
   subsets: ['latin'],
@@ -10,9 +10,9 @@ const lora = Lora({
   variable: '--font-lora',
 });
 
-const displayFont = Tangerine({
+const displayFont = Great_Vibes({
   subsets: ['latin'],
-  weight: ['700'],
+  weight: ['400'],
   display: 'swap',
   variable: '--font-display',
 });

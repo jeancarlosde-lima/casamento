@@ -24,7 +24,7 @@ export default function Home() {
         <HeroSection />
         <AnimatedSection className="py-16 md:py-32 text-center bg-card">
           <div className="container">
-            <h2 className="font-display text-4xl md:text-5xl lg:text-7xl font-semibold leading-tight max-w-4xl mx-auto text-foreground">
+            <h2 className="font-display text-4xl md:text-6xl max-w-4xl mx-auto text-foreground">
               Um jardim digital para <span className="text-primary">nosso amor</span>
             </h2>
           </div>

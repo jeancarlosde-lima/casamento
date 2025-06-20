@@ -23,7 +23,7 @@ export function EventDetailsSection() {
   return (
     <div className="container">
       <div className="mx-auto max-w-2xl text-center mb-12">
-        <h2 className="font-display font-bold text-4xl md:text-5xl text-foreground">O Casamento</h2>
+        <h2 className="font-display text-4xl md:text-5xl text-foreground">O Casamento</h2>
         <p className="mt-4 text-muted-foreground text-lg">
           Sábado, 10 de Outubro de 2026
         </p>
@@ -33,7 +33,7 @@ export function EventDetailsSection() {
           <Card key={detail.title} className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-2 border-t-4 border-t-primary rounded-3xl">
             <CardHeader className="items-center gap-4">
               {detail.icon}
-              <CardTitle className="font-display font-semibold text-3xl">{detail.title}</CardTitle>
+              <CardTitle className="font-display text-3xl">{detail.title}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-muted-foreground">{detail.description}</p>

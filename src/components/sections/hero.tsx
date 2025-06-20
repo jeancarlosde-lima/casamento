@@ -7,7 +7,7 @@ export function HeroSection() {
         <p className="text-lg md:text-xl text-muted-foreground uppercase tracking-wider mb-4">
             Convite de casamento de:
         </p>
-        <h1 className="font-display font-bold text-7xl md:text-9xl lg:text-[10rem] drop-shadow-lg text-primary leading-none">
+        <h1 className="font-display text-7xl md:text-9xl lg:text-[9.5rem] drop-shadow-lg text-primary leading-none">
           Eloisa & Jean
         </h1>
         <p className="mt-8 text-xl md:text-2xl text-muted-foreground font-light italic">

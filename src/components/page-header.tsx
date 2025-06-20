@@ -14,7 +14,7 @@ export default function PageHeader() {
       <div className="container flex h-16 items-center">
         <a href="#hero" className="flex items-center gap-2 mr-8">
           <Heart className="h-6 w-6 text-primary" />
-          <span className="font-display text-xl font-bold">E & J</span>
+          <span className="font-display text-xl">E & J</span>
         </a>
         <nav className="hidden md:flex items-center gap-6 text-sm">
           {navItems.map((item) => (

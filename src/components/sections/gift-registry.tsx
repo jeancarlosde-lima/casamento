@@ -6,7 +6,7 @@ export function GiftRegistrySection() {
   return (
     <div className="container max-w-lg">
       <div className="text-center mb-10">
-        <h2 className="font-display font-bold text-4xl md:text-5xl">Lista de Presentes</h2>
+        <h2 className="font-display text-4xl md:text-5xl">Lista de Presentes</h2>
         <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
           Sua presença é o maior presente! Mas se você também quiser nos presentear, preparamos uma lista de presentes com muito carinho.
         </p>

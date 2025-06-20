@@ -52,7 +52,7 @@ export function RsvpSection() {
                 <div className="mx-auto bg-primary rounded-full p-4 w-fit text-primary-foreground mb-4">
                     <Heart className="h-10 w-10" />
                 </div>
-                <CardTitle className="font-display font-semibold text-3xl">Obrigado!</CardTitle>
+                <CardTitle className="font-display text-3xl">Obrigado!</CardTitle>
             </CardHeader>
             <CardContent>
                 <p className="text-muted-foreground text-lg">{state.message}</p>
@@ -65,7 +65,7 @@ export function RsvpSection() {
   return (
     <div className="container max-w-lg">
       <div className="text-center mb-10">
-          <h2 className="font-display font-bold text-4xl md:text-5xl">Confirmar Presença</h2>
+          <h2 className="font-display text-4xl md:text-5xl">Confirmar Presença</h2>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
               Sua presença é o maior presente que podemos receber. Por favor, confirme sua participação até 1º de setembro de 2026 para que possamos planejar este momento especial com todo carinho.
           </p>
