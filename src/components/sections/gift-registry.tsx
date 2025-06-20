@@ -1,34 +1,34 @@
-
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Gift } from 'lucide-react';
 
 export function GiftRegistrySection() {
   return (
-    <section id="gift-registry" className="py-16 md:py-24 bg-secondary/30">
-      <div className="container max-w-lg">
-        <Card className="text-center shadow-lg">
-          <CardHeader>
-             <div className="mx-auto bg-primary rounded-full p-3 w-fit text-primary-foreground mb-4">
-                <Gift className="h-8 w-8" />
-            </div>
-            <CardTitle className="font-headline text-4xl">Gift Registry</CardTitle>
-            <CardDescription>
-              Your presence at our wedding is the greatest gift of all.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-muted-foreground">
-              However, if you wish to honor us with a gift, we have registered for items we would love to have in our new home.
-            </p>
-            <Button asChild size="lg">
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                View Our Registry
-              </a>
-            </Button>
-          </CardContent>
-        </Card>
+    <div className="container max-w-lg">
+      <div className="text-center mb-10">
+        <h2 className="font-display font-bold text-4xl md:text-5xl">Lista de Presentes</h2>
+        <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
+          Sua presença é o maior presente! Mas se você também quiser nos presentear, preparamos uma lista de presentes com muito carinho.
+        </p>
       </div>
-    </section>
+      <Card className="shadow-lg bg-background rounded-2xl text-center">
+        <CardHeader className="items-center pt-8">
+          <div className="mx-auto bg-primary rounded-full p-4 w-fit text-primary-foreground mb-4">
+            <Gift className="h-10 w-10" />
+          </div>
+          <CardTitle className="font-display text-3xl">Nossa Lista</CardTitle>
+        </CardHeader>
+        <CardContent className="p-8 pt-4">
+          <p className="text-muted-foreground mb-6">
+            Para acessar nossa lista de presentes, basta clicar no botão abaixo. Agradecemos de coração por fazer parte deste momento tão especial!
+          </p>
+          <Button asChild size="lg" className="rounded-full">
+            <a href="#" target="_blank" rel="noopener noreferrer">
+              Ver Lista de Presentes
+            </a>
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

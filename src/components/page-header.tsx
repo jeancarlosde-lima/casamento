@@ -6,6 +6,7 @@ export default function PageHeader() {
     { name: 'Nossa História', href: '#our-story' },
     { name: 'O Casamento', href: '#event-details' },
     { name: 'Galeria', href: '#gallery' },
+    { name: 'Presentes', href: '#gift-registry' },
   ];
 
   return (

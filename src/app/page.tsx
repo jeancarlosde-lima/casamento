@@ -7,6 +7,7 @@ import { OurStorySection } from '@/components/sections/our-story';
 import { QuoteSection } from '@/components/sections/quote';
 import { RsvpSection } from '@/components/sections/rsvp';
 import { AnimatedSection } from '@/components/animated-section';
+import { GiftRegistrySection } from '@/components/sections/gift-registry';
 
 export default function Home() {
   return (
@@ -40,8 +41,11 @@ export default function Home() {
         <AnimatedSection id="our-story" className="py-16 md:py-24 bg-card">
           <OurStorySection />
         </AnimatedSection>
-        <AnimatedSection id="rsvp" className="py-16 md:py-24 bg-card">
+        <AnimatedSection id="rsvp" className="py-16 md:py-24 bg-background">
           <RsvpSection />
+        </AnimatedSection>
+        <AnimatedSection id="gift-registry" className="py-16 md:py-24 bg-card">
+          <GiftRegistrySection />
         </AnimatedSection>
       </main>
       <PageFooter />

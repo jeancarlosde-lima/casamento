@@ -78,12 +78,6 @@ export function RsvpSection() {
               <Input id="name" name="name" placeholder="Seu nome completo" required className="bg-card rounded-lg focus:border-primary" />
               {state.errors?.name && <p className="text-sm font-medium text-destructive">{state.errors.name[0]}</p>}
             </div>
-
-             <div className="space-y-2">
-              <Label htmlFor="guests">Número de Acompanhantes</Label>
-              <Input id="guests" name="guests" type="number" min="0" defaultValue="0" className="bg-card rounded-lg focus:border-primary"/>
-              {state.errors?.guests && <p className="text-sm font-medium text-destructive">{state.errors.guests[0]}</p>}
-            </div>
             
             <div className="space-y-2">
               <Label htmlFor="message">Mensagem Especial (Opcional)</Label>
