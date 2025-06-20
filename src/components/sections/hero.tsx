@@ -9,15 +9,15 @@ export function HeroSection() {
     >
       {/* Background Image */}
       <Image
-        src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Andrei_Rublev_-_The_Old_Testament_Trinity_-_Google_Art_Project.jpg"
-        alt="A Santíssima Trindade de Andrei Rublev"
+        src="https://i.imgur.com/uG5G7x1.jpeg"
+        alt="Fundo artístico com a Santíssima Trindade"
         fill
         className="object-cover absolute inset-0 z-0"
         priority
       />
       
       {/* Overlay to ensure text readability */}
-      <div className="absolute inset-0 z-10 bg-black/50" />
+      <div className="absolute inset-0 z-10 bg-black/30" />
 
       {/* Content */}
       <div className="relative z-20 p-4 animate-fade-in container">
