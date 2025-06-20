@@ -4,21 +4,27 @@ import { HeroSection } from '@/components/sections/hero';
 import { OurStorySection } from '@/components/sections/our-story';
 import { EventDetailsSection } from '@/components/sections/event-details';
 import { RsvpSection } from '@/components/sections/rsvp';
-import { GiftRegistrySection } from '@/components/sections/gift-registry';
-import { TravelAssistantSection } from '@/components/sections/travel-assistant';
-import { Separator } from '@/components/ui/separator';
+import { QuoteSection } from '@/components/sections/quote';
+import { GallerySection } from '@/components/sections/gallery';
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <PageHeader />
-      <main className="flex-1 animate-fade-in">
+      <main className="flex-1">
         <HeroSection />
-        <OurStorySection />
+        <section className="py-16 md:py-24 text-center bg-card/50">
+          <div className="container">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight max-w-4xl mx-auto">
+              Um jardim digital para <span className="text-primary">nosso amor</span>
+            </h2>
+          </div>
+        </section>
+        <GallerySection />
+        <QuoteSection />
         <EventDetailsSection />
+        <OurStorySection />
         <RsvpSection />
-        <GiftRegistrySection />
-        <TravelAssistantSection />
       </main>
       <PageFooter />
     </div>

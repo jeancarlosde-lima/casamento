@@ -1,17 +1,17 @@
 
-import { Flower2 } from 'lucide-react';
-
 export default function PageFooter() {
   return (
-    <footer className="py-8 bg-background">
+    <footer className="py-16 px-8 bg-foreground text-background text-center">
       <div className="container flex flex-col items-center justify-center gap-4">
-        <Flower2 className="h-8 w-8 text-primary" />
-        <p className="text-center text-sm leading-loose text-muted-foreground">
-          Made with love for Eloisa & Jean.
+        <h2 className="text-3xl md:text-5xl font-light italic">Com amor, Eloisa & Jean</h2>
+        <p className="text-lg opacity-80 font-light mb-8">
+          Trazendo de volta o amor positivo ✨
         </p>
-        <p className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} All rights reserved.
-        </p>
+        <div className="w-full pt-8 border-t border-background/20">
+            <p className="text-sm opacity-60 font-light">
+                Criado e desenvolvido por Jean Lima, todos os direitos reservados. © {new Date().getFullYear()}
+            </p>
+        </div>
       </div>
     </footer>
   );

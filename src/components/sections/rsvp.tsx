@@ -7,15 +7,16 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Heart } from 'lucide-react';
+import { Heart, Send } from 'lucide-react';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" disabled={pending} className="w-full">
-      {pending ? 'Submitting...' : 'Send RSVP'}
+    <Button type="submit" disabled={pending} size="lg" className="w-full text-lg py-7 rounded-full shadow-lg hover:shadow-primary/40 transition-shadow">
+      {pending ? 'Enviando...' : 'Confirmar Presença'}
+      <Send className="ml-2 h-5 w-5" />
     </Button>
   );
 }
@@ -30,13 +31,13 @@ export function RsvpSection() {
     if (state.message && !state.success) {
       toast({
         variant: 'destructive',
-        title: 'Oops! Something went wrong.',
+        title: 'Oops! Algo deu errado.',
         description: state.message,
       });
     }
     if (state.message && state.success) {
       toast({
-        title: 'Thank you!',
+        title: 'Obrigado!',
         description: state.message,
       });
       formRef.current?.reset();
@@ -47,15 +48,15 @@ export function RsvpSection() {
     return (
       <section id="rsvp" className="py-16 md:py-24 bg-background">
         <div className="container max-w-lg text-center">
-            <Card className="shadow-lg">
+            <Card className="shadow-lg p-8">
                 <CardHeader>
-                    <div className="mx-auto bg-primary rounded-full p-3 w-fit text-primary-foreground mb-4">
-                        <Heart className="h-8 w-8" />
+                    <div className="mx-auto bg-primary rounded-full p-4 w-fit text-primary-foreground mb-4">
+                        <Heart className="h-10 w-10" />
                     </div>
-                    <CardTitle className="font-headline text-3xl">Thank You!</CardTitle>
+                    <CardTitle className="font-semibold text-3xl">Obrigado!</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p className="text-muted-foreground">{state.message}</p>
+                    <p className="text-muted-foreground text-lg">{state.message}</p>
                 </CardContent>
             </Card>
         </div>
@@ -67,32 +68,33 @@ export function RsvpSection() {
   return (
     <section id="rsvp" className="py-16 md:py-24 bg-background">
       <div className="container max-w-lg">
+        <div className="text-center mb-10">
+            <h2 className="font-bold text-4xl md:text-5xl">Confirmar Presença</h2>
+            <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
+                Sua presença é o maior presente que podemos receber. Por favor, confirme sua participação até 1º de setembro de 2026 para que possamos planejar este momento especial com todo carinho.
+            </p>
+        </div>
         <Card className="shadow-lg">
-          <CardHeader className="text-center">
-            <CardTitle className="font-headline text-4xl">Will you be there?</CardTitle>
-            <CardDescription>Please RSVP by October 16th, 2024</CardDescription>
-          </CardHeader>
-          <CardContent>
+          <CardContent className="p-8">
             <form ref={formRef} action={dispatch} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input id="name" name="name" placeholder="Your name(s)" />
+                <Label htmlFor="name">Nome Completo</Label>
+                <Input id="name" name="name" placeholder="Seu nome completo" required />
                 {state.errors?.name && <p className="text-sm font-medium text-destructive">{state.errors.name[0]}</p>}
               </div>
-              <div className="space-y-2">
-                <Label>Will you be attending?</Label>
-                <RadioGroup name="attending" className="flex gap-4 pt-2">
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="yes" id="attending-yes" />
-                    <Label htmlFor="attending-yes" className="font-normal">Joyfully Accepts</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="no" id="attending-no" />
-                    <Label htmlFor="attending-no" className="font-normal">Regretfully Declines</Label>
-                  </div>
-                </RadioGroup>
-                {state.errors?.attending && <p className="text-sm font-medium text-destructive">{state.errors.attending[0]}</p>}
+
+               <div className="space-y-2">
+                <Label htmlFor="guests">Número de Acompanhantes</Label>
+                <Input id="guests" name="guests" type="number" min="0" defaultValue="0" />
+                {state.errors?.guests && <p className="text-sm font-medium text-destructive">{state.errors.guests[0]}</p>}
               </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="message">Mensagem Especial (Opcional)</Label>
+                <Textarea id="message" name="message" placeholder="Deixe uma mensagem carinhosa para os noivos..." rows={3} />
+                {state.errors?.message && <p className="text-sm font-medium text-destructive">{state.errors.message[0]}</p>}
+              </div>
+              
               <SubmitButton />
             </form>
           </CardContent>

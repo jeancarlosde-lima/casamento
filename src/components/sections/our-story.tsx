@@ -1,39 +1,40 @@
-import Image from 'next/image';
-import { Card, CardContent } from '@/components/ui/card';
+
+const storyParts = [
+    {
+        title: "O Início: Uma Amizade em Deus",
+        text: "Nossa caminhada começou com o mais belo dos alicerces: uma amizade sincera. Acreditamos que não foi o acaso que nos uniu, mas a suave Providência Divina que, em Seu tempo perfeito, entrelaçou nossos caminhos para que, juntos, pudéssemos florescer."
+    },
+    {
+        title: "A Gratidão como Oração",
+        text: "Elevamos nossos corações em um cântico de gratidão ao Pai. Cada sorriso e cada passo é um eco de Sua infinita bondade. Reconhecemos que o amor que hoje nos une é um dom imerecido, um presente precioso que nos foi confiado para cuidarmos e honrarmos."
+    },
+    {
+        title: "Refletindo o Amor Trinitário",
+        text: "Contemplamos na Santíssima Trindade o modelo perfeito de comunhão. Um Deus que é Amor, relação e doação mútua. É este o mistério que aspiramos viver: um amor que não se fecha, mas que transborda em vida e graça, onde um se doa inteiramente ao outro."
+    },
+    {
+        title: "Nossa Missão a Dois",
+        text: "Firmamos nosso \"sim\" um ao outro, e também a Deus. Nosso compromisso é construir um lar que seja um santuário de oração, um refúgio de paz e um farol de esperança para o mundo. Com a graça divina, desejamos ser um testemunho vivo do amor de Cristo."
+    }
+]
 
 export function OurStorySection() {
   return (
-    <section id="our-story" className="py-16 md:py-24 bg-background">
+    <section id="our-story" className="py-16 md:py-24 bg-card/50">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center mb-12">
-          <h2 className="font-headline text-4xl md:text-5xl">Our Story</h2>
-          <p className="mt-4 text-muted-foreground">A journey of love, laughter, and a lifetime to come.</p>
+          <h2 className="font-bold text-4xl md:text-5xl">A Fonte de Nossa Alegria</h2>
         </div>
-        <Card className="overflow-hidden">
-          <CardContent className="p-0">
-            <div className="grid md:grid-cols-2 items-center">
-              <div className="p-8 md:p-12 order-2 md:order-1">
-                <h3 className="font-headline text-2xl mb-4">How We Met</h3>
-                <p className="text-muted-foreground mb-4">
-                  Our story began on a sunny afternoon, not with a dramatic movie scene, but with a simple, shared laugh over a spilled coffee. That small moment of connection sparked a conversation that lasted for hours, and we both knew we had found something special.
-                </p>
-                <h3 className="font-headline text-2xl mt-8 mb-4">The Proposal</h3>
-                <p className="text-muted-foreground">
-                  Years of adventures, dreams, and unwavering support led to a quiet evening under a sky full of stars. On the same spot where we had our first real date, one of us got down on one knee, and with a heart full of joy, the other said "yes." It was a perfect, personal moment that marked the beginning of our forever.
-                </p>
-              </div>
-              <div className="relative h-64 md:h-full w-full order-1 md:order-2">
-                 <Image
-                  src="https://placehold.co/600x800.png"
-                  alt="Eloisa and Jean"
-                  data-ai-hint="happy couple"
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="grid md:grid-cols-2 gap-x-12 gap-y-10 max-w-4xl mx-auto">
+            {storyParts.map((part) => (
+                <div key={part.title} className="text-left">
+                    <h3 className="text-2xl font-semibold mb-3 text-primary/90">{part.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                        {part.text}
+                    </p>
+                </div>
+            ))}
+        </div>
       </div>
     </section>
   );

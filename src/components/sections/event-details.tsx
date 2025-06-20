@@ -1,56 +1,56 @@
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Calendar, Clock, MapPin } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Church, MapPin, PartyPopper } from 'lucide-react';
 
 const eventDetails = [
   {
-    icon: <Calendar className="h-8 w-8 text-primary" />,
-    title: 'Date',
-    description: 'Saturday, November 16, 2024',
+    icon: <Church className="h-10 w-10 text-primary" />,
+    title: 'Cerimônia',
+    description: 'Onde celebraremos nossos votos de amor eterno diante de Deus, família e amigos queridos.',
+    address: 'R. Capela do Alto, 86 - Vila Virginia, Itaquaquecetuba - SP, 08576-150',
+    mapLink: 'https://www.google.com/maps/search/?api=1&query=R.+Capela+do+Alto,+86+-+Vila+Virginia,Itaquaquecetuba+-+SP'
   },
   {
-    icon: <Clock className="h-8 w-8 text-primary" />,
-    title: 'Time',
-    description: 'Ceremony at 4:00 PM, Reception to follow',
-  },
-  {
-    icon: <MapPin className="h-8 w-8 text-primary" />,
-    title: 'Venue',
-    description: 'The Grand Palace, 123 Celebration Ave, Happytown',
+    icon: <PartyPopper className="h-10 w-10 text-primary" />,
+    title: 'Recepção',
+    description: 'Onde continuaremos a festa com música, dança e momentos inesquecíveis ao lado de vocês.',
+    address: 'Estr. do Oura, 420 - Ipelândia, Suzano - SP, 08620-060',
+    mapLink: 'https://www.google.com/maps/search/?api=1&query=Estr.+do+Oura,+420+-+Ipelândia,Suzano+-+SP'
   },
 ];
 
 export function EventDetailsSection() {
   return (
-    <section id="event-details" className="py-16 md:py-24 bg-secondary/30">
+    <section id="event-details" className="py-16 md:py-24 bg-background">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center mb-12">
-          <h2 className="font-headline text-4xl md:text-5xl">The Wedding</h2>
-          <p className="mt-4 text-muted-foreground">
-            Here's what you need to know for the big day.
+          <h2 className="font-bold text-4xl md:text-5xl">O Casamento</h2>
+          <p className="mt-4 text-muted-foreground text-lg">
+            Sábado, 10 de Outubro de 2026
           </p>
         </div>
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
           {eventDetails.map((detail) => (
-            <Card key={detail.title} className="text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <CardHeader className="items-center">
+            <Card key={detail.title} className="text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-t-4 border-t-primary">
+              <CardHeader className="items-center gap-4">
                 {detail.icon}
-                <CardTitle className="font-headline mt-4">{detail.title}</CardTitle>
+                <CardTitle className="font-semibold text-3xl">{detail.title}</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
                 <p className="text-muted-foreground">{detail.description}</p>
+                <div className="bg-primary/10 p-4 rounded-lg text-sm text-foreground font-medium">
+                  {detail.address}
+                </div>
+                 <Button asChild size="lg" variant="outline">
+                    <a href={detail.mapLink} target="_blank" rel="noopener noreferrer">
+                      <MapPin className="mr-2 h-4 w-4" />
+                      Ver no mapa
+                    </a>
+                  </Button>
               </CardContent>
             </Card>
           ))}
-        </div>
-        <div className="text-center mt-12">
-          <Button asChild size="lg">
-            <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer">
-              <MapPin className="mr-2 h-4 w-4" />
-              Open in Google Maps
-            </a>
-          </Button>
         </div>
       </div>
     </section>

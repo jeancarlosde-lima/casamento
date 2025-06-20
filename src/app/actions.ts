@@ -4,17 +4,17 @@
 import { z } from 'zod';
 
 const RsvpSchema = z.object({
-  name: z.string().min(2, { message: 'Please enter your full name.' }),
-  attending: z.enum(['yes', 'no'], {
-    required_error: 'Please let us know if you can make it.',
-  }),
+  name: z.string().min(2, { message: 'Por favor, insira seu nome completo.' }),
+  guests: z.coerce.number().int().min(0, "O número de acompanhantes não pode ser negativo.").default(0),
+  message: z.string().max(500, 'A mensagem não pode ter mais de 500 caracteres.').optional(),
 });
 
 export type RsvpState = {
   message?: string | null;
   errors?: {
     name?: string[];
-    attending?: string[];
+    guests?: string[];
+    message?: string[];
   };
   success: boolean;
 };
@@ -25,32 +25,32 @@ export async function submitRsvp(
 ): Promise<RsvpState> {
   const validatedFields = RsvpSchema.safeParse({
     name: formData.get('name'),
-    attending: formData.get('attending'),
+    guests: formData.get('guests'),
+    message: formData.get('message'),
   });
 
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Submit RSVP.',
+      message: 'Campos faltando. Falha ao enviar a confirmação.',
       success: false,
     };
   }
 
-  const { name, attending } = validatedFields.data;
+  const { name, guests, message } = validatedFields.data;
 
   try {
     // In a real application, you would save this data to a database.
-    // For example: await db.rsvp.create({ data: { name, attending } });
-    console.log(`RSVP received from ${name}, Attending: ${attending}`);
+    console.log(`RSVP received from ${name}, Guests: ${guests}, Message: ${message}`);
     
     return {
-      message: "Thank you for your response! We can't wait to celebrate with you.",
+      message: "Obrigado por confirmar sua presença!",
       success: true,
     };
   } catch (error) {
     console.error('RSVP Submission Error:', error);
     return {
-      message: 'An unexpected error occurred. Please try again.',
+      message: 'Ocorreu um erro inesperado. Por favor, tente novamente.',
       success: false,
     };
   }

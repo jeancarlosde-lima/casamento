@@ -4,11 +4,8 @@ import { Button } from '@/components/ui/button';
 
 export default function PageHeader() {
   const navItems = [
-    { name: 'Our Story', href: '#our-story' },
-    { name: 'Event Details', href: '#event-details' },
-    { name: 'RSVP', href: '#rsvp' },
-    { name: 'Gift Registry', href: '#gift-registry' },
-    { name: 'Travel', href: '#travel-assistant' },
+    { name: 'Nossa História', href: '#our-story' },
+    { name: 'O Casamento', href: '#event-details' },
   ];
 
   return (
@@ -16,9 +13,9 @@ export default function PageHeader() {
       <div className="container flex h-16 items-center">
         <a href="#hero" className="flex items-center gap-2 mr-4">
           <Heart className="h-6 w-6 text-primary" />
-          <span className="font-bold font-headline">E & J</span>
+          <span className="font-bold">E & J</span>
         </a>
-        <nav className="hidden md:flex items-center gap-4 text-sm">
+        <nav className="hidden md:flex items-center gap-6 text-sm">
           {navItems.map((item) => (
             <a
               key={item.name}
@@ -31,7 +28,7 @@ export default function PageHeader() {
         </nav>
         <div className="flex flex-1 items-center justify-end gap-2">
           <Button asChild>
-            <a href="#rsvp">RSVP</a>
+            <a href="#rsvp">Confirmar Presença</a>
           </Button>
         </div>
       </div>
