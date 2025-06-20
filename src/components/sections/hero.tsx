@@ -1,20 +1,18 @@
 import { Button } from '@/components/ui/button';
-import { Great_Vibes } from 'next/font/google';
-
-const greatVibes = Great_Vibes({
-  subsets: ['latin'],
-  weight: ['400'],
-  display: 'swap',
-});
 
 export function HeroSection() {
   return (
-    <section id="hero" className="relative min-h-[100vh] flex items-center justify-center text-center bg-gradient-to-br from-background to-card py-20">
+    <section id="hero" className="relative min-h-[100vh] flex items-center justify-center text-center bg-gradient-to-br from-background to-card py-20 overflow-hidden">
+       <div className="absolute inset-0 flex items-center justify-center z-0">
+        <div className="text-primary/10 text-[40rem] lg:text-[50rem] font-black blur-xl select-none leading-none -mt-16">
+          ✝
+        </div>
+      </div>
       <div className="relative z-10 p-4 animate-fade-in container">
         <p className="text-lg md:text-xl text-muted-foreground uppercase tracking-wider mb-4">
             Convite de casamento de:
         </p>
-        <h1 className={`${greatVibes.className} text-6xl sm:text-7xl md:text-8xl lg:text-9xl drop-shadow-lg text-primary leading-tight`}>
+        <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl drop-shadow-lg text-primary leading-tight">
           Eloisa & Jean
         </h1>
         <p className="mt-8 text-xl md:text-2xl text-muted-foreground font-light italic">
