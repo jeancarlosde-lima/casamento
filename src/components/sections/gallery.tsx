@@ -30,9 +30,8 @@ function GalleryRow({ items, reverse = false }: { items: { text: string, hint: s
                         src={`https://placehold.co/400x500.png`}
                         alt={item.text}
                         data-ai-hint={item.hint}
-                        layout="fill"
-                        objectFit="cover"
-                        className="transition-transform duration-500 group-hover:scale-105"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-300" />
                     <div className="absolute inset-0 flex items-center justify-center">
