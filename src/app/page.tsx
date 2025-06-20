@@ -13,13 +13,6 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <PageHeader />
-      <div className="trinity-bg">
-        <div className="trinity-symbol">✝</div>
-        <div className="trinity-symbol">☩</div>
-        <div className="trinity-symbol">✠</div>
-        <div className="trinity-symbol">♱</div>
-        <div className="trinity-symbol">✟</div>
-      </div>
       <main className="flex-1">
         <HeroSection />
         <AnimatedSection className="py-16 md:py-32 text-center bg-card">

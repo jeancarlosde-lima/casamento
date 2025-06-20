@@ -1,24 +1,30 @@
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 
 export function HeroSection() {
   return (
-    <section id="hero" className="relative min-h-[100vh] flex items-center justify-center text-center bg-gradient-to-br from-background to-card py-20 overflow-hidden">
-       <div className="absolute inset-0 flex items-center justify-center z-0">
-        <div className="text-primary/10 text-[40rem] lg:text-[50rem] font-black blur-xl select-none leading-none -mt-16">
-          ✝
-        </div>
-      </div>
+    <section id="hero" className="relative min-h-[100vh] flex items-center justify-center text-center text-foreground py-20 overflow-hidden">
+       <div className="absolute inset-0 z-0">
+         <Image
+            src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Andrei_Rublev_-_The_Old_Testament_Trinity_-_Google_Art_Project.jpg"
+            alt="Ícone da Santíssima Trindade de Andrei Rublev"
+            fill
+            className="object-cover"
+            priority
+         />
+         <div className="absolute inset-0 bg-background/70 backdrop-blur-sm" />
+       </div>
       <div className="relative z-10 p-4 animate-fade-in container">
-        <p className="text-lg md:text-xl text-muted-foreground uppercase tracking-wider mb-4">
+        <p className="text-lg md:text-xl text-foreground/80 uppercase tracking-wider mb-4">
             Convite de casamento de:
         </p>
-        <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl drop-shadow-lg text-primary leading-tight">
+        <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl drop-shadow-lg text-foreground leading-tight">
           Eloisa & Jean
         </h1>
-        <p className="mt-8 text-xl md:text-2xl text-muted-foreground font-light italic">
+        <p className="mt-8 text-xl md:text-2xl text-foreground/80 font-light italic">
           10 de outubro de 2026
         </p>
-        <p className="mt-8 text-base md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-8 text-base md:text-lg text-foreground/90 max-w-2xl mx-auto leading-relaxed">
           O amor conjugal é chamado a ser reflexo da perfeita unidade da Trindade: três Pessoas, um só Deus; dois corações, um só amor.
         </p>
         <div className="mt-10">
