@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 const galleryItems = [
     { text: "Nosso primeiro encontro", hint: "couple date" },
@@ -57,15 +57,21 @@ export function GallerySection() {
             <Dialog open={!!selectedImage} onOpenChange={(isOpen) => { if (!isOpen) setSelectedImage(null); }}>
                 <DialogContent className="max-w-4xl w-full p-0 bg-transparent border-none shadow-none">
                     {selectedImage && (
-                        <div className="relative aspect-square md:aspect-video w-full">
-                             <Image
-                                src={selectedImage.src}
-                                alt={selectedImage.alt}
-                                data-ai-hint={selectedImage.hint}
-                                fill
-                                className="object-contain rounded-lg"
-                            />
-                        </div>
+                        <>
+                            <DialogHeader className="sr-only">
+                                <DialogTitle>{selectedImage.alt}</DialogTitle>
+                                <DialogDescription>Imagem ampliada de {selectedImage.alt}.</DialogDescription>
+                            </DialogHeader>
+                            <div className="relative aspect-square md:aspect-video w-full">
+                                 <Image
+                                    src={selectedImage.src}
+                                    alt={selectedImage.alt}
+                                    data-ai-hint={selectedImage.hint}
+                                    fill
+                                    className="object-contain rounded-lg"
+                                />
+                            </div>
+                        </>
                     )}
                 </DialogContent>
             </Dialog>
