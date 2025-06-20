@@ -1,19 +1,19 @@
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 
 export function HeroSection() {
   return (
     <section id="hero" className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden">
-       <div className="absolute inset-0 z-0">
-         <Image
-            src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Andrei_Rublev_-_The_Old_Testament_Trinity_-_Google_Art_Project.jpg"
-            alt="Ícone da Santíssima Trindade de Andrei Rublev"
-            fill
-            className="object-cover"
-            priority
-         />
-         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-       </div>
+      {/* Background Image Container */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center blur-sm"
+        style={{
+          backgroundImage:
+            "url('https://upload.wikimedia.org/wikipedia/commons/a/a2/Andrei_Rublev_-_The_Old_Testament_Trinity_-_Google_Art_Project.jpg')",
+        }}
+      />
+      {/* Overlay */}
+      <div className="absolute inset-0 z-0 bg-black/50" />
+
       <div className="relative z-10 p-4 animate-fade-in container">
         <p className="text-lg md:text-xl text-white/80 uppercase tracking-wider mb-4">
             Convite de casamento de:
