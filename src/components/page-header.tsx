@@ -25,7 +25,7 @@ export default function PageHeader() {
             <a
               key={item.name}
               href={item.href}
-              className="text-foreground/60 transition-colors hover:text-foreground/80"
+              className="text-foreground/60 transition-colors hover:text-primary"
             >
               {item.name}
             </a>
@@ -49,7 +49,7 @@ export default function PageHeader() {
               <nav className="flex flex-col gap-6 text-lg">
                 {navItems.map((item) => (
                   <SheetClose asChild key={item.name}>
-                    <a href={item.href} className="text-foreground/80 hover:text-foreground -ml-4 pl-4 py-2 rounded-lg hover:bg-muted">
+                    <a href={item.href} className="text-foreground/80 hover:text-primary -ml-4 pl-4 py-2 rounded-lg hover:bg-primary/10">
                       {item.name}
                     </a>
                   </SheetClose>
