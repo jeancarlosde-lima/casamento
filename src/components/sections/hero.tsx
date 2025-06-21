@@ -4,12 +4,16 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden bg-cover bg-no-repeat"
-      style={{
-        backgroundImage: `url('https://i.imgur.com/TitKk70.jpg')`,
-        backgroundPosition: 'center 30%',
-      }}
+      className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden"
     >
+      <div
+        className="absolute inset-0 bg-cover bg-no-repeat"
+        style={{
+          backgroundImage: `url('https://i.imgur.com/TitKk70.jpg')`,
+          backgroundPosition: 'center 30%',
+          filter: 'saturate(1.4) contrast(1.4)',
+        }}
+      />
       {/* Overlay escurecendo a imagem */}
       <div className="absolute inset-0 z-10 bg-black/60" />
 
