@@ -1,22 +1,12 @@
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
 export function HeroSection() {
   return (
-    <section 
-      id="hero" 
-      className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden"
+    <section
+      id="hero"
+      className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url('/images/trindade-santa-bg.png')` }}
     >
-      {/* Imagem de fundo */}
-      <Image
-        src="/images/trindade-santa-bg.png"
-        alt="A Santíssima Trindade como imagem de fundo"
-        fill
-        className="object-contain"
-        quality={90}
-        priority={true}
-      />
-      
       {/* Overlay escurecendo a imagem */}
       <div className="absolute inset-0 z-10 bg-black/40" />
 
