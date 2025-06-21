@@ -11,7 +11,7 @@ export function HeroSection() {
         style={{
           backgroundImage: `url('https://i.imgur.com/TitKk70.jpg')`,
           backgroundPosition: 'center 30%',
-          filter: 'saturate(1.4) contrast(1.4)',
+          filter: 'contrast(1.4)',
         }}
       />
       {/* Overlay escurecendo a imagem */}
