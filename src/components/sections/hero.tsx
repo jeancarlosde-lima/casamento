@@ -4,8 +4,11 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden bg-cover bg-top bg-no-repeat"
-      style={{ backgroundImage: `url('https://i.imgur.com/BUZYlpb.png')` }}
+      className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden bg-cover bg-no-repeat"
+      style={{
+        backgroundImage: `url('https://i.imgur.com/BUZYlpb.png')`,
+        backgroundPosition: 'center 30%',
+      }}
     >
       {/* Overlay escurecendo a imagem */}
       <div className="absolute inset-0 z-10 bg-black/40" />
