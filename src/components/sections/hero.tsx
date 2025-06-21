@@ -6,7 +6,7 @@ export function HeroSection() {
       id="hero"
       className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden bg-cover bg-no-repeat"
       style={{
-        backgroundImage: `url('https://imgur.com/undefined')`,
+        backgroundImage: `url('https://i.imgur.com/gK9p29J.jpeg')`,
         backgroundPosition: 'center 30%',
       }}
     >
