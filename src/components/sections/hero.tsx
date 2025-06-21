@@ -7,13 +7,9 @@ export function HeroSection() {
       id="hero" 
       className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden"
     >
-      {/* 
-        This uses the image you provided. 
-        Please make sure to create a `/public` folder at the root of your project
-        and place your image there as `trindade-santa-bg.jpg`.
-      */}
+      {/* Imagem de fundo */}
       <Image
-        src="/trindade-santa-bg.jpg"
+        src="/images/trindade-santa-bg.png"
         alt="A Santíssima Trindade como imagem de fundo"
         fill
         className="object-contain"
@@ -21,13 +17,13 @@ export function HeroSection() {
         priority={true}
       />
       
-      {/* Overlay to ensure text readability */}
+      {/* Overlay escurecendo a imagem */}
       <div className="absolute inset-0 z-10 bg-black/40" />
 
-      {/* Content */}
+      {/* Conteúdo acima da imagem */}
       <div className="relative z-20 p-4 animate-fade-in container">
         <p className="text-lg md:text-xl text-white/80 uppercase tracking-wider mb-4">
-            Convite de casamento de:
+          Convite de casamento de:
         </p>
         <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl drop-shadow-lg leading-tight">
           Eloisa & Jean
