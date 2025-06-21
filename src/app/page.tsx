@@ -15,31 +15,33 @@ export default function Home() {
       <PageHeader />
       <main className="flex-1">
         <HeroSection />
-        <AnimatedSection className="py-16 md:py-32 text-center bg-card">
-          <div className="container">
-            <h2 className="font-display text-4xl md:text-6xl max-w-4xl mx-auto text-foreground">
-              Um jardim digital para <span className="text-primary">nosso amor</span>
-            </h2>
-          </div>
-        </AnimatedSection>
-        <AnimatedSection id="gallery" className="py-16 md:py-24 bg-card">
-          <GallerySection />
-        </AnimatedSection>
-        <AnimatedSection id="quote" className="py-16 md:py-24 bg-card">
-          <QuoteSection />
-        </AnimatedSection>
-        <AnimatedSection id="event-details" className="py-16 md:py-24 bg-background">
-          <EventDetailsSection />
-        </AnimatedSection>
-        <AnimatedSection id="our-story" className="py-16 md:py-24 bg-card">
-          <OurStorySection />
-        </AnimatedSection>
-        <AnimatedSection id="rsvp" className="py-16 md:py-24 bg-background">
-          <RsvpSection />
-        </AnimatedSection>
-        <AnimatedSection id="gift-registry" className="py-16 md:py-24 bg-card">
-          <GiftRegistrySection />
-        </AnimatedSection>
+        <div className="relative z-20 bg-card">
+          <AnimatedSection className="py-16 md:py-32 text-center">
+            <div className="container">
+              <h2 className="font-display text-4xl md:text-6xl max-w-4xl mx-auto text-foreground">
+                Um jardim digital para <span className="text-primary">nosso amor</span>
+              </h2>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection id="gallery" className="py-16 md:py-24 bg-card">
+            <GallerySection />
+          </AnimatedSection>
+          <AnimatedSection id="quote" className="py-16 md:py-24 bg-card">
+            <QuoteSection />
+          </AnimatedSection>
+          <AnimatedSection id="event-details" className="py-16 md:py-24 bg-background">
+            <EventDetailsSection />
+          </AnimatedSection>
+          <AnimatedSection id="our-story" className="py-16 md:py-24 bg-card">
+            <OurStorySection />
+          </AnimatedSection>
+          <AnimatedSection id="rsvp" className="py-16 md:py-24 bg-background">
+            <RsvpSection />
+          </AnimatedSection>
+          <AnimatedSection id="gift-registry" className="py-16 md:py-24 bg-card">
+            <GiftRegistrySection />
+          </AnimatedSection>
+        </div>
       </main>
       <PageFooter />
     </div>

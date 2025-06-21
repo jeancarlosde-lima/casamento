@@ -4,7 +4,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden"
+      className="sticky top-0 z-10 h-screen flex items-center justify-center text-center text-white py-20"
     >
       <div
         className="absolute inset-0 bg-cover bg-no-repeat"
@@ -14,7 +14,7 @@ export function HeroSection() {
         }}
       />
       {/* Overlay escurecendo a imagem */}
-      <div className="absolute inset-0 z-10 bg-foreground/50" />
+      <div className="absolute inset-0 z-10 bg-foreground/40" />
 
       {/* Conteúdo acima da imagem */}
       <div className="relative z-20 p-4 animate-fade-in container">
