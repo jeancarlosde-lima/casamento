@@ -5,7 +5,7 @@ export function HeroSection() {
     <section
       id="hero"
       className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url('/image/trindade-santa-bg.png')` }}
+      style={{ backgroundImage: `url('https://i.imgur.com/G5Yy6Zq.png')` }}
     >
       {/* Overlay escurecendo a imagem */}
       <div className="absolute inset-0 z-10 bg-black/40" />
@@ -26,7 +26,7 @@ export function HeroSection() {
         </p>
         <div className="mt-10">
           <Button asChild size="lg" className="rounded-full shadow-lg hover:shadow-primary/40 transition-shadow">
-            <a href="#rsvp">Confirmar Presença</a>
+            <a href="#rsvp">Mande sua mensagem aqui</a>
           </Button>
         </div>
       </div>

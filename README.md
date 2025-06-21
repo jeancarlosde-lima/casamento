@@ -19,14 +19,14 @@ O projeto foi construído utilizando um conjunto de ferramentas modernas e efici
 
 ## Análise do Problema com a Imagem de Fundo
 
-Durante o desenvolvimento, enfrentamos um desafio persistente para fazer a imagem de fundo da seção principal aparecer corretamente. A dificuldade ocorreu por uma combinação de fatores técnicos relacionados a como o Next.js lida com imagens:
+Durante o desenvolvimento, enfrentamos um desafio persistente para fazer a imagem de fundo da seção principal aparecer corretamente. A dificuldade ocorreu por uma combinação de fatores técnicos relacionados a como o Next.js e o CSS interagem.
 
-1.  **Uso de Imagens Externas (Imgur):** A primeira tentativa foi usar um link de imagem hospedado no Imgur. Por padrão, o Next.js bloqueia imagens de domínios externos por razões de segurança. Para que funcionasse, seria necessário adicionar o domínio `i.imgur.com` ao arquivo de configuração `next.config.ts`. Essa configuração não foi feita corretamente no início, causando a falha.
+1.  **Imagens Locais vs. Externas:** As tentativas iniciais envolveram tanto imagens locais (dentro da pasta `public`) quanto links externos (hospedados no Imgur). Houve desafios em ambos os casos:
+    *   **Imagens Locais:** Ocorreram inconsistências na referência ao caminho do arquivo. No Next.js, um arquivo em `public/image/fundo.jpg` deve ser referenciado como `/image/fundo.jpg`, e qualquer erro nesse caminho impede a imagem de carregar.
+    *   **Imagens Externas com `next/image`:** Ao tentar usar o componente otimizado `<Image>` do Next.js com um link do Imgur, o site não exibia a imagem. Isso ocorria porque o Next.js exige que domínios externos sejam explicitamente autorizados no arquivo de configuração `next.config.ts` por razões de segurança, um passo que foi omitido inicialmente.
 
-2.  **Caminho de Imagens Locais:** Quando mudamos para uma imagem local, colocada na pasta `public`, houve confusão sobre o caminho correto a ser usado no código. No Next.js, arquivos dentro da pasta `public` são servidos a partir da raiz do site. Por exemplo, um arquivo em `public/image/fundo.jpg` deve ser referenciado no código como `/image/fundo.jpg`. Pequenos erros ou inconsistências nesse caminho impediram que a imagem fosse encontrada pelo servidor.
-
-3.  **`next/image` vs. Fundo CSS:** Houve uma alternância entre usar o componente otimizado `<Image>` do Next.js e a propriedade CSS `background-image`. O componente `<Image>` é excelente para a maioria dos casos, mas para um fundo que precisa preencher toda a tela (`cover`), a abordagem com CSS é, muitas vezes, mais direta e menos suscetível a erros de configuração de layout.
+2.  **Componente `next/image` vs. Fundo CSS (`background-image`):** A tentativa de usar o componente `<Image>` para um fundo de tela cheia mostrou-se complexa. O componente é ideal para imagens de conteúdo, mas para um fundo decorativo que precisa preencher todo o espaço (`cover`) e ter uma sobreposição de cor, a propriedade `background-image` do CSS é uma solução mais direta e menos propensa a erros de layout.
 
 **A solução final e mais robusta foi:**
-*   Colocar a imagem no caminho correto dentro da pasta `public`.
-*   Aplicá-la como um `background-image` via CSS, garantindo que ela preencha o contêiner corretamente sem ser cortada ou mal posicionada, e permitindo a fácil aplicação de uma camada de sobreposição escura para legibilidade do texto.
+*   Utilizar o link da imagem hospedada no Imgur.
+*   Aplicá-la diretamente como um `background-image` via CSS na seção principal. Esta abordagem contorna as complexidades de configuração do Next.js para imagens externas, pois o navegador carrega a imagem diretamente via CSS, sem a intervenção do framework. Isso garantiu que a imagem preenchesse o contêiner corretamente e permitiu a fácil aplicação de uma camada de sobreposição escura para a legibilidade do texto.
