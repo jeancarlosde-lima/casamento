@@ -15,8 +15,8 @@ export function HeroSection() {
       <Image
         src="/trindade-santa-bg.jpg"
         alt="A Santíssima Trindade como imagem de fundo"
-        layout="fill"
-        objectFit="cover"
+        fill
+        className="object-contain"
         quality={90}
         priority={true}
       />
