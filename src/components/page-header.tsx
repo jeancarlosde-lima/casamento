@@ -8,6 +8,7 @@ export default function PageHeader() {
     { name: 'O Casamento', href: '#event-details' },
     { name: 'Galeria', href: '#gallery' },
     { name: 'Presentes', href: '#gift-registry' },
+    { name: 'Confirmar Presença', href: '#rsvp' },
   ];
 
   return (
@@ -19,7 +20,7 @@ export default function PageHeader() {
         </a>
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6 text-sm mr-6">
+        <nav className="hidden md:flex items-center gap-6 text-sm">
           {navItems.map((item) => (
             <a
               key={item.name}
@@ -30,12 +31,6 @@ export default function PageHeader() {
             </a>
           ))}
         </nav>
-        
-        <div className="hidden md:flex items-center justify-end gap-2">
-          <Button asChild className="rounded-full">
-            <a href="#rsvp">Confirmar Presença</a>
-          </Button>
-        </div>
 
         {/* Mobile Navigation */}
         <div className="md:hidden">
@@ -59,11 +54,6 @@ export default function PageHeader() {
                     </a>
                   </SheetClose>
                 ))}
-                <SheetClose asChild>
-                   <Button asChild className="rounded-full mt-4">
-                      <a href="#rsvp">Confirmar Presença</a>
-                    </Button>
-                </SheetClose>
               </nav>
             </SheetContent>
           </Sheet>
