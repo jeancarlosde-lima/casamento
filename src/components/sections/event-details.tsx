@@ -1,17 +1,18 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Church, MapPin, PartyPopper } from 'lucide-react';
+import { MapPin } from 'lucide-react';
+import Image from 'next/image';
 
 const eventDetails = [
   {
-    icon: <Church className="h-10 w-10 text-primary" />,
+    imageSrc: 'https://i.imgur.com/0KtnE8c.png',
     title: 'Cerimônia',
     description: 'Onde celebraremos nossos votos de amor eterno diante de Deus, família e amigos queridos.',
     address: 'R. Capela do Alto, 86 - Vila Virginia, Itaquaquecetuba - SP, 08576-150',
     mapLink: 'https://www.google.com/maps/search/?api=1&query=R.+Capela+do+Alto,+86+-+Vila+Virginia,Itaquaquecetuba+-+SP'
   },
   {
-    icon: <PartyPopper className="h-10 w-10 text-primary" />,
+    imageSrc: 'https://i.imgur.com/B6xX83O.png',
     title: 'Recepção',
     description: 'Onde continuaremos a festa com música, dança e momentos inesquecíveis ao lado de vocês.',
     address: 'Estr. do Oura, 420 - Ipelândia, Suzano - SP, 08620-060',
@@ -32,7 +33,13 @@ export function EventDetailsSection() {
         {eventDetails.map((detail, index) => (
           <Card key={detail.title} className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-2 border-t-4 border-t-primary rounded-3xl stagger-item" style={{'--delay': `${150 * (index + 1)}ms`} as React.CSSProperties}>
             <CardHeader className="items-center gap-4">
-              {detail.icon}
+               <Image
+                src={detail.imageSrc}
+                alt={`${detail.title} icon`}
+                width={80}
+                height={80}
+                className="rounded-full object-cover aspect-square bg-primary/10 p-1"
+              />
               <CardTitle className="font-display text-3xl">{detail.title}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
