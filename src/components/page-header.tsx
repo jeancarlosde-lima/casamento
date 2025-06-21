@@ -16,7 +16,7 @@ export default function PageHeader() {
       <div className="container flex h-16 items-center">
         <a href="#hero" className="flex items-center gap-2 mr-auto">
           <Heart className="h-6 w-6 text-primary" />
-          <span className="font-display text-xl">E & J</span>
+          <span className="font-display text-xl text-primary">E & J</span>
         </a>
         
         {/* Desktop Navigation */}
@@ -44,7 +44,7 @@ export default function PageHeader() {
             <SheetContent side="right">
                 <a href="#hero" className="flex items-center gap-2 mb-12">
                     <Heart className="h-6 w-6 text-primary" />
-                    <span className="font-display text-xl">E & J</span>
+                    <span className="font-display text-xl text-primary">E & J</span>
                 </a>
               <nav className="flex flex-col gap-6 text-lg">
                 {navItems.map((item) => (
