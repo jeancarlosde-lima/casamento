@@ -40,7 +40,7 @@ export function EventDetailsSection() {
       </div>
       <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
         {eventDetails.map((detail, index) => (
-          <Card key={detail.title} className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-2 border-t-4 border-t-primary rounded-3xl stagger-item" style={{'--delay': `${150 * (index + 1)}ms`} as React.CSSProperties}>
+          <Card key={detail.title} className="flex flex-col text-center shadow-lg hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-2 border-t-4 border-t-primary rounded-3xl stagger-item" style={{'--delay': `${150 * (index + 1)}ms`} as React.CSSProperties}>
             <CardHeader className="items-center gap-4">
                <Image
                 src={detail.imageSrc}
@@ -51,12 +51,12 @@ export function EventDetailsSection() {
               />
               <CardTitle className="font-display text-3xl">{detail.title}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-muted-foreground">{detail.description}</p>
+            <CardContent className="flex flex-col flex-1">
+              <p className="text-muted-foreground mb-4">{detail.description}</p>
               <div className="bg-primary/10 p-4 rounded-lg text-sm text-foreground font-medium">
                 {detail.address}
               </div>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2 mt-auto">
                     <Button asChild className="rounded-full flex-1 font-poppins">
                       <a href={detail.mapLink} target="_blank" rel="noopener noreferrer">
                         <MapPin className="mr-2 h-5 w-5" />
