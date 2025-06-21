@@ -12,11 +12,11 @@ export default function PageHeader() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-background/20 bg-foreground">
       <div className="container flex h-16 items-center">
         <a href="#hero" className="flex items-center gap-2 mr-auto">
-          <Heart className="h-6 w-6 text-primary" />
-          <span className="font-display text-xl text-primary">E & J</span>
+          <Heart className="h-6 w-6 text-background" />
+          <span className="font-display text-xl text-background">E & J</span>
         </a>
         
         {/* Desktop Navigation */}
@@ -25,7 +25,7 @@ export default function PageHeader() {
             <a
               key={item.name}
               href={item.href}
-              className="text-foreground/60 transition-colors hover:text-primary"
+              className="text-background/80 transition-colors hover:text-background font-medium"
             >
               {item.name}
             </a>
@@ -36,7 +36,7 @@ export default function PageHeader() {
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="rounded-full">
+              <Button variant="ghost" size="icon" className="rounded-full text-background hover:bg-background/20">
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Abrir menu</span>
               </Button>
