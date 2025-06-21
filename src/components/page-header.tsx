@@ -8,7 +8,7 @@ export default function PageHeader() {
     { name: 'O Casamento', href: '#event-details' },
     { name: 'Galeria', href: '#gallery' },
     { name: 'Presentes', href: '#gift-registry' },
-    { name: 'Confirmar Presença', href: '#rsvp' },
+    { name: 'Mande sua mensagem aqui', href: '#rsvp' },
   ];
 
   return (
