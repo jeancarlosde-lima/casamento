@@ -29,16 +29,16 @@ export default function Home() {
           <AnimatedSection id="quote" className="py-16 md:py-24 bg-card">
             <QuoteSection />
           </AnimatedSection>
-          <AnimatedSection id="event-details" className="py-16 md:py-24 bg-background">
+          <AnimatedSection id="event-details" className="py-16 md:py-24 bg-background use-stagger">
             <EventDetailsSection />
           </AnimatedSection>
-          <AnimatedSection id="our-story" className="py-16 md:py-24 bg-card">
+          <AnimatedSection id="our-story" className="py-16 md:py-24 bg-card use-stagger">
             <OurStorySection />
           </AnimatedSection>
-          <AnimatedSection id="rsvp" className="py-16 md:py-24 bg-background">
+          <AnimatedSection id="rsvp" className="py-16 md:py-24 bg-background use-stagger">
             <RsvpSection />
           </AnimatedSection>
-          <AnimatedSection id="gift-registry" className="py-16 md:py-24 bg-card">
+          <AnimatedSection id="gift-registry" className="py-16 md:py-24 bg-card use-stagger">
             <GiftRegistrySection />
           </AnimatedSection>
         </div>

@@ -5,13 +5,13 @@ import { Gift } from 'lucide-react';
 export function GiftRegistrySection() {
   return (
     <div className="container max-w-lg">
-      <div className="text-center mb-10">
+      <div className="text-center mb-10 stagger-item" style={{'--delay': '0ms'} as React.CSSProperties}>
         <h2 className="font-display text-4xl md:text-5xl">Lista de Presentes</h2>
         <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
           Sua presença é o maior presente! Mas se você também quiser nos presentear, preparamos uma lista de presentes com muito carinho.
         </p>
       </div>
-      <Card className="shadow-lg bg-background rounded-2xl text-center">
+      <Card className="shadow-lg bg-background rounded-2xl text-center stagger-item" style={{'--delay': '150ms'} as React.CSSProperties}>
         <CardHeader className="items-center pt-8">
           <div className="mx-auto bg-primary rounded-full p-4 w-fit text-primary-foreground mb-4">
             <Gift className="h-10 w-10" />

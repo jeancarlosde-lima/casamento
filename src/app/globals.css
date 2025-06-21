@@ -65,12 +65,35 @@ html {
 }
 
 @layer utilities {
+  /* --- Base animation for sections --- */
   .animated-section {
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   .animated-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* --- Staggered animation for children within a section --- */
+  /* By default, we override the parent animation when staggering */
+  .animated-section.use-stagger {
+      opacity: 1;
+      transform: none;
+  }
+  
+  /* Each child to be staggered has these initial styles */
+  .stagger-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
+    /* The delay is set via an inline style variable */
+    transition-delay: var(--delay);
+  }
+
+  /* When the parent section is visible, the children animate in */
+  .animated-section.is-visible .stagger-item {
     opacity: 1;
     transform: translateY(0);
   }

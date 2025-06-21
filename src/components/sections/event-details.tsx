@@ -22,15 +22,15 @@ const eventDetails = [
 export function EventDetailsSection() {
   return (
     <div className="container">
-      <div className="mx-auto max-w-2xl text-center mb-12">
+      <div className="mx-auto max-w-2xl text-center mb-12 stagger-item" style={{'--delay': '0ms'} as React.CSSProperties}>
         <h2 className="font-display text-4xl md:text-5xl text-foreground">O Casamento</h2>
         <p className="mt-4 text-muted-foreground text-lg">
           Sábado, 10 de Outubro de 2026
         </p>
       </div>
       <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
-        {eventDetails.map((detail) => (
-          <Card key={detail.title} className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-2 border-t-4 border-t-primary rounded-3xl">
+        {eventDetails.map((detail, index) => (
+          <Card key={detail.title} className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-2 border-t-4 border-t-primary rounded-3xl stagger-item" style={{'--delay': `${150 * (index + 1)}ms`} as React.CSSProperties}>
             <CardHeader className="items-center gap-4">
               {detail.icon}
               <CardTitle className="font-display text-3xl">{detail.title}</CardTitle>

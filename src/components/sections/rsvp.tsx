@@ -64,13 +64,13 @@ export function RsvpSection() {
 
   return (
     <div className="container max-w-lg">
-      <div className="text-center mb-10">
+      <div className="text-center mb-10 stagger-item" style={{'--delay': '0ms'} as React.CSSProperties}>
           <h2 className="font-display text-4xl md:text-5xl">Confirmar Presença</h2>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
               Sua presença é o maior presente que podemos receber. Por favor, confirme sua participação até 1º de setembro de 2026 para que possamos planejar este momento especial com todo carinho.
           </p>
       </div>
-      <Card className="shadow-lg bg-background rounded-2xl">
+      <Card className="shadow-lg bg-background rounded-2xl stagger-item" style={{'--delay': '150ms'} as React.CSSProperties}>
         <CardContent className="p-8">
           <form ref={formRef} action={dispatch} className="space-y-6">
             <div className="space-y-2">
