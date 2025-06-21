@@ -5,7 +5,7 @@ export function HeroSection() {
     <section
       id="hero"
       className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url('/images/trindade-santa-bg.png')` }}
+      style={{ backgroundImage: `url('/image/trindade-santa-bg.png')` }}
     >
       {/* Overlay escurecendo a imagem */}
       <div className="absolute inset-0 z-10 bg-black/40" />
