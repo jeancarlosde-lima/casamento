@@ -11,11 +11,10 @@ export function HeroSection() {
         style={{
           backgroundImage: `url('https://i.imgur.com/TitKk70.jpg')`,
           backgroundPosition: 'center 30%',
-          filter: 'contrast(1.4)',
         }}
       />
       {/* Overlay escurecendo a imagem */}
-      <div className="absolute inset-0 z-10 bg-black/60" />
+      <div className="absolute inset-0 z-10 bg-foreground/50" />
 
       {/* Conteúdo acima da imagem */}
       <div className="relative z-20 p-4 animate-fade-in container">
