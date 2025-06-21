@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
 export function HeroSection() {
@@ -6,16 +7,22 @@ export function HeroSection() {
       id="hero" 
       className="relative min-h-[100vh] flex items-center justify-center text-center text-white py-20 overflow-hidden"
     >
-      {/* Background Image - using CSS for robustness */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `url('https://i.imgur.com/uG5G7x1.jpeg')`,
-        }}
+      {/* 
+        This uses the image you provided. 
+        Please make sure to create a `/public` folder at the root of your project
+        and place your image there as `trindade-santa-bg.jpg`.
+      */}
+      <Image
+        src="/trindade-santa-bg.jpg"
+        alt="A Santíssima Trindade como imagem de fundo"
+        layout="fill"
+        objectFit="cover"
+        quality={90}
+        priority={true}
       />
       
       {/* Overlay to ensure text readability */}
-      <div className="absolute inset-0 z-10 bg-black/30" />
+      <div className="absolute inset-0 z-10 bg-black/40" />
 
       {/* Content */}
       <div className="relative z-20 p-4 animate-fade-in container">
