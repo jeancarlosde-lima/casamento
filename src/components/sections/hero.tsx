@@ -11,7 +11,7 @@ export function HeroSection() {
       }}
     >
       {/* Overlay escurecendo a imagem */}
-      <div className="absolute inset-0 z-10 bg-black/40" />
+      <div className="absolute inset-0 z-10 bg-black/60" />
 
       {/* Conteúdo acima da imagem */}
       <div className="relative z-20 p-4 animate-fade-in container">
