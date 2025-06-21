@@ -10,7 +10,7 @@ export function HeroSection() {
         className="absolute inset-0 bg-cover bg-no-repeat"
         style={{
           backgroundImage: `url('https://i.imgur.com/TitKk70.jpg')`,
-          backgroundPosition: 'center 30%',
+          backgroundPosition: '60% 30%',
         }}
       />
       {/* Overlay escurecendo a imagem */}
