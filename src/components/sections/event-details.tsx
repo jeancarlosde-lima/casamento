@@ -57,13 +57,13 @@ export function EventDetailsSection() {
                 {detail.address}
               </div>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
-                    <Button asChild className="rounded-full flex-1">
+                    <Button asChild className="rounded-full flex-1 font-poppins">
                       <a href={detail.mapLink} target="_blank" rel="noopener noreferrer">
                         <MapPin className="mr-2 h-5 w-5" />
                         Google Maps
                       </a>
                     </Button>
-                    <Button asChild className="rounded-full flex-1 bg-[#33363B] hover:bg-[#4b4e52]">
+                    <Button asChild className="rounded-full flex-1 bg-[#33363B] hover:bg-[#4b4e52] font-poppins">
                       <a href={detail.wazeLink} target="_blank" rel="noopener noreferrer">
                         <WazeIcon className="mr-2 h-5 w-5" />
                         Waze
