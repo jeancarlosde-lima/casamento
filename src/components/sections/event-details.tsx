@@ -53,9 +53,9 @@ export function EventDetailsSection() {
                 className="rounded-full object-cover aspect-square bg-primary/10 p-1"
               />
               <CardTitle className="font-display text-3xl">{detail.title}</CardTitle>
-              <p className="font-poppins font-semibold text-primary/90 text-xl -mt-2">{detail.venueName}</p>
             </CardHeader>
             <CardContent className="flex flex-col flex-1">
+              <p className="font-poppins font-semibold text-primary/90 text-xl -mt-2 mb-4">{detail.venueName}</p>
               <p className="text-muted-foreground mb-4">{detail.description}</p>
               <div className="bg-primary/10 p-4 rounded-lg text-sm text-foreground font-medium">
                 {detail.address}
