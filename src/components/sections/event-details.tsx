@@ -1,11 +1,8 @@
-'use client';
-
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MapPin } from 'lucide-react';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import { differenceInDays, differenceInMonths } from 'date-fns';
+import { Countdown } from '@/components/countdown';
 
 const eventDetails = [
   {
@@ -32,60 +29,7 @@ const WazeIcon = (props: React.SVGProps<SVGSVGElement>) => (
     </svg>
 );
 
-const weddingDate = new Date(2026, 9, 10, 16, 0, 0); // Oct 10, 2026. Month is 0-indexed.
-
-function formatCountdown() {
-  const now = new Date();
-
-  if (now >= weddingDate) {
-    return 'O grande dia chegou!';
-  }
-
-  const totalDays = differenceInDays(weddingDate, now);
-
-  if (totalDays === 0) {
-    return 'É hoje!';
-  }
-  
-  if (totalDays <= 7) {
-    return `Falta${totalDays > 1 ? 'm' : ''} ${totalDays} dia${totalDays > 1 ? 's' : ''}!`;
-  }
-  
-  if (totalDays <= 31) {
-    const weeks = Math.floor(totalDays / 7);
-    const days = totalDays % 7;
-    let text = `Falta${weeks > 1 ? 'm' : ''} ${weeks} semana${weeks > 1 ? 's' : ''}`;
-    if (days > 0) {
-      text += ` e ${days} dia${days > 1 ? 's' : ''}`;
-    }
-    return `${text}!`;
-  }
-  
-  const months = differenceInMonths(weddingDate, now);
-  const tempDate = new Date(now);
-  tempDate.setMonth(tempDate.getMonth() + months);
-  const days = differenceInDays(weddingDate, tempDate);
-
-  let text = `Falta${months > 1 ? 'm' : ''} ${months} ${months > 1 ? 'meses' : 'mês'}`;
-  if (days > 0 && days < 31) {
-    text += ` e ${days} dia${days > 1 ? 's' : ''}`;
-  }
-  return `${text} para o tão esperado dia.`;
-}
-
 export function EventDetailsSection() {
-  const [countdown, setCountdown] = useState<string | null>(null);
-
-  useEffect(() => {
-    // This code runs only on the client, after the component has mounted.
-    // This avoids a server-client mismatch.
-    setCountdown(formatCountdown());
-    const timer = setInterval(() => {
-      setCountdown(formatCountdown());
-    }, 1000 * 60); // Update every minute
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <div className="container">
       <div className="mx-auto max-w-2xl text-center mb-12 stagger-item" style={{'--delay': '0ms'} as React.CSSProperties}>
@@ -93,10 +37,7 @@ export function EventDetailsSection() {
         <p className="mt-4 text-muted-foreground text-lg">
           Sábado, 10 de Outubro de 2026
         </p>
-        <p className="mt-2 text-primary text-xl font-poppins font-semibold min-h-[28px]">
-          {/* Render a placeholder on server and initial client render to prevent hydration mismatch */}
-          {countdown ?? <>&nbsp;</>}
-        </p>
+        <Countdown />
       </div>
       <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
         {eventDetails.map((detail, index) => (
