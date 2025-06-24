@@ -8,6 +8,7 @@ const eventDetails = [
   {
     imageSrc: 'https://i.imgur.com/0KtnE8c.png',
     title: 'Cerimônia',
+    venueName: 'Paróquia Santos Apóstolos',
     description: 'Onde celebraremos nossos votos de amor eterno diante de Deus, família e amigos queridos.',
     address: 'R. Capela do Alto, 86 - Vila Virginia, Itaquaquecetuba - SP, 08576-150',
     mapLink: 'https://www.google.com/maps/search/?api=1&query=R.+Capela+do+Alto,+86+-+Vila+Virginia,Itaquaquecetuba+-+SP',
@@ -16,6 +17,7 @@ const eventDetails = [
   {
     imageSrc: 'https://i.imgur.com/B6xX83O.png',
     title: 'Recepção',
+    venueName: 'Sítio Recanto das Palmeiras',
     description: 'Onde continuaremos a festa com música, dança e momentos inesquecíveis ao lado de vocês.',
     address: 'Estr. do Oura, 420 - Ipelândia, Suzano - SP, 08620-060',
     mapLink: 'https://www.google.com/maps/search/?api=1&query=Estr.+do+Oura,+420+-+Ipelândia,Suzano+-+SP',
@@ -51,6 +53,7 @@ export function EventDetailsSection() {
                 className="rounded-full object-cover aspect-square bg-primary/10 p-1"
               />
               <CardTitle className="font-display text-3xl">{detail.title}</CardTitle>
+              <p className="font-poppins font-semibold text-primary/90 text-xl -mt-2">{detail.venueName}</p>
             </CardHeader>
             <CardContent className="flex flex-col flex-1">
               <p className="text-muted-foreground mb-4">{detail.description}</p>
