@@ -74,9 +74,11 @@ function formatCountdown() {
 }
 
 export function EventDetailsSection() {
-  const [countdown, setCountdown] = useState('');
+  const [countdown, setCountdown] = useState<string | null>(null);
 
   useEffect(() => {
+    // This code runs only on the client, after the component has mounted.
+    // This avoids a server-client mismatch.
     setCountdown(formatCountdown());
     const timer = setInterval(() => {
       setCountdown(formatCountdown());
@@ -91,11 +93,10 @@ export function EventDetailsSection() {
         <p className="mt-4 text-muted-foreground text-lg">
           Sábado, 10 de Outubro de 2026
         </p>
-        {countdown && (
-            <p className="mt-2 text-primary text-xl font-poppins font-semibold">
-                {countdown}
-            </p>
-        )}
+        <p className="mt-2 text-primary text-xl font-poppins font-semibold min-h-[28px]">
+          {/* Render a placeholder on server and initial client render to prevent hydration mismatch */}
+          {countdown ?? <>&nbsp;</>}
+        </p>
       </div>
       <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
         {eventDetails.map((detail, index) => (
