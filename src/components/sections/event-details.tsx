@@ -55,10 +55,10 @@ export function EventDetailsSection() {
               <CardTitle className="font-display text-3xl">{detail.title}</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col flex-1">
-              <p className="font-poppins font-semibold text-primary/90 text-xl -mt-2 mb-4">{detail.venueName}</p>
               <p className="text-muted-foreground mb-4">{detail.description}</p>
-              <div className="bg-primary/10 p-4 rounded-lg text-sm text-foreground font-medium">
-                {detail.address}
+              <div className="bg-primary/10 p-4 rounded-lg text-sm text-foreground mb-4">
+                <p className="font-poppins font-semibold text-primary/90 text-lg mb-1">{detail.venueName}</p>
+                <p className="font-medium">{detail.address}</p>
               </div>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2 mt-auto">
                     <Button asChild className="rounded-full flex-1 font-poppins">
