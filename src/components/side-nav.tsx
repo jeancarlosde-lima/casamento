@@ -18,15 +18,15 @@ const navItems = [
 
 function NavLinks({ activeSection, onLinkClick, isMobile = false }: { activeSection: string, onLinkClick?: () => void, isMobile?: boolean }) {
     return (
-        <ul className={cn("flex flex-col gap-3", isMobile ? "items-start" : "items-start")}>
+        <ul className={cn("flex flex-col", isMobile ? "gap-3" : "gap-4 items-center")}>
             {navItems.map(item => (
                 <li key={item.id} className="w-full">
                     <a
                         href={`#${item.id}`}
                         onClick={onLinkClick}
                         className={cn(
-                            'group flex items-center gap-3 transition-all duration-300',
-                            isMobile ? 'py-2 text-lg' : ''
+                            'group relative flex items-center transition-all duration-300',
+                            isMobile ? 'gap-3 py-2 text-lg' : 'justify-center'
                         )}
                         aria-label={`Ir para a seção ${item.title}`}
                     >
@@ -34,12 +34,21 @@ function NavLinks({ activeSection, onLinkClick, isMobile = false }: { activeSect
                             'flex-shrink-0 rounded-full bg-primary transition-all duration-300',
                             activeSection === item.id ? 'w-3 h-3' : 'w-2 h-2 bg-primary/40 group-hover:bg-primary group-hover:scale-110'
                         )}></div>
-                        <span className={cn(
-                            'font-poppins transition-all duration-300',
-                             activeSection === item.id ? 'text-primary font-bold' : 'text-foreground/60 group-hover:text-primary'
-                        )}>
-                            {item.title}
-                        </span>
+
+                        {isMobile ? (
+                             <span className={cn(
+                                'font-poppins',
+                                activeSection === item.id ? 'text-primary font-bold' : 'text-foreground/60 group-hover:text-primary'
+                            )}>
+                                {item.title}
+                            </span>
+                        ) : (
+                            <span className={cn(
+                                'absolute left-full ml-4 whitespace-nowrap rounded-md bg-card px-3 py-1.5 text-sm font-poppins font-semibold text-card-foreground shadow-lg opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none'
+                            )}>
+                                {item.title}
+                            </span>
+                        )}
                     </a>
                 </li>
             ))}
