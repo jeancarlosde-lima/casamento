@@ -25,7 +25,7 @@ function NavLinks({ activeSection, onLinkClick, isMobile = false }: { activeSect
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
         if (onLinkClick) {
-            setTimeout(() => onLinkClick(id), 150);
+            onLinkClick(id);
         }
     };
 
@@ -78,17 +78,29 @@ export function SideNav() {
 
   const handleScroll = useCallback(() => {
     const offset = window.innerHeight * 0.4;
-    let currentActiveId = 'hero';
+    // Default to hero, this will be the case when at the very top of the page.
+    let newActiveSection = 'hero'; 
 
-    for (const item of navItems) {
-        const element = document.getElementById(item.id);
-        if (element && element.getBoundingClientRect().top < offset) {
-            currentActiveId = item.id;
+    // Iterate backwards from the last nav item.
+    for (let i = navItems.length - 1; i >= 0; i--) {
+      const item = navItems[i];
+      const element = document.getElementById(item.id);
+
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        
+        // If the top of the section is above our designated offset line in the viewport,
+        // we consider it the current section. Since we're iterating backwards,
+        // the first one we find is the one we want.
+        if (rect.top <= offset) {
+          newActiveSection = item.id;
+          break; // Found the active section, no need to check further.
         }
+      }
     }
-    
-    if (activeSection !== currentActiveId) {
-        setActiveSection(currentActiveId);
+
+    if (activeSection !== newActiveSection) {
+      setActiveSection(newActiveSection);
     }
   }, [activeSection]);
 
