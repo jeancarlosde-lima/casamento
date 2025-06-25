@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Menu, X } from 'lucide-react';
 
 const navItems = [
@@ -103,20 +103,20 @@ export function SideNav() {
               </SheetTrigger>
               <SheetContent side="right" className="bg-card w-4/5 p-0">
                 <div className="flex flex-col h-full">
-                    <div className="flex justify-between items-center p-4 border-b">
-                       <h2 className="font-display text-2xl text-primary">Menu</h2>
+                    <SheetHeader className="flex flex-row justify-between items-center p-4 border-b text-left space-y-0">
+                       <SheetTitle className="font-display text-2xl text-primary font-normal">Menu</SheetTitle>
                        <SheetClose asChild>
                             <Button variant="ghost" size="icon" className="rounded-full">
                                 <X className="h-6 w-6" />
                                 <span className="sr-only">Fechar menu</span>
                             </Button>
                        </SheetClose>
-                    </div>
-                    <div className="mt-4 p-4">
+                    </SheetHeader>
+                    <div className="p-4">
                       <NavLinks activeSection={activeSection} onLinkClick={() => setIsMobileMenuOpen(false)} isMobile={true} />
                     </div>
                     <div className="mt-auto text-center p-6 bg-background/50">
-                        <p className="font-display text-3xl text-primary">Eloisa & Jean</p>
+                        <p className="font-display text-3xl text-primary">Eloisa &amp; Jean</p>
                     </div>
                 </div>
               </SheetContent>
