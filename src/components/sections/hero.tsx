@@ -4,11 +4,10 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="sticky top-0 z-10 flex h-[60vh] items-center justify-center bg-foreground/20 py-20 text-center text-white md:h-screen"
+      className="sticky top-0 z-10 flex h-screen items-center justify-center bg-foreground/20 py-20 text-center text-white"
     >
       <div
-        className="absolute inset-0 bg-contain bg-center bg-no-repeat md:bg-cover md:bg-[position:50%_30%]"
-        style={{ backgroundImage: "url('https://i.imgur.com/TitKk70.jpg')" }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('https://i.imgur.com/Z7a4G6c.jpg')] md:bg-[url('https://i.imgur.com/TitKk70.jpg')]"
       />
       {/* Overlay escurecendo a imagem */}
       <div className="absolute inset-0 z-10 bg-foreground/40" />
@@ -18,8 +17,8 @@ export function HeroSection() {
         <p className="whitespace-nowrap text-lg md:text-xl text-white/80 uppercase tracking-wider mb-4">
           Convite de casamento de:
         </p>
-        <h1 className="font-display text-5xl sm:text-6xl md:text-8xl lg:text-9xl drop-shadow-lg leading-tight">
-          Eloisa & Jean
+        <h1 className="font-display text-[12vw] sm:text-6xl md:text-8xl lg:text-9xl drop-shadow-lg leading-tight whitespace-nowrap">
+          Eloisa &amp; Jean
         </h1>
         <p className="mt-8 text-xl md:text-2xl text-white/80 font-light italic">
           10 de outubro de 2026
