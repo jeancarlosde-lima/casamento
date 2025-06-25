@@ -8,7 +8,7 @@ export function HeroSection() {
     >
       {/* Use a vertical image for mobile, and the horizontal one for desktop */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('https://i.imgur.com/Z7a4G6c.jpg')] md:bg-[url('https://i.imgur.com/TitKk70.jpg')]"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-hero-mobile md:bg-hero-desktop"
       />
       {/* Overlay escurecendo a imagem */}
       <div className="absolute inset-0 z-10 bg-foreground/40" />
