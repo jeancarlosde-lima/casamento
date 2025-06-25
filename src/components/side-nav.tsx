@@ -16,14 +16,26 @@ const navItems = [
   { id: 'gift-registry', title: 'Presentes' },
 ];
 
-function NavLinks({ activeSection, onLinkClick, isMobile = false }: { activeSection: string, onLinkClick?: () => void, isMobile?: boolean }) {
+function NavLinks({ activeSection, onLinkClick, isMobile = false }: { activeSection: string, onLinkClick?: (id: string) => void, isMobile?: boolean }) {
+    
+    const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+        event.preventDefault();
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        if (onLinkClick) {
+            setTimeout(() => onLinkClick(id), 150);
+        }
+    };
+
     return (
         <ul className={cn("flex flex-col", isMobile ? "gap-3" : "gap-4 items-center")}>
             {navItems.map(item => (
                 <li key={item.id} className="w-full">
                     <a
                         href={`#${item.id}`}
-                        onClick={onLinkClick}
+                        onClick={(e) => handleLinkClick(e, item.id)}
                         className={cn(
                             'group relative flex items-center transition-all duration-300',
                             isMobile ? 'gap-3 py-2 text-lg' : 'justify-center'
@@ -59,6 +71,10 @@ function NavLinks({ activeSection, onLinkClick, isMobile = false }: { activeSect
 export function SideNav() {
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleMobileLinkClick = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   const handleScroll = useCallback(() => {
     const offset = window.innerHeight * 0.4;
@@ -104,7 +120,7 @@ export function SideNav() {
               <SheetContent side="right" className="bg-card w-4/5 p-0">
                 <div className="flex flex-col h-full">
                     <SheetHeader className="flex flex-row justify-between items-center p-4 border-b text-left space-y-0">
-                       <SheetTitle className="font-display text-2xl text-primary font-normal">Menu</SheetTitle>
+                       <SheetTitle>Menu</SheetTitle>
                        <SheetClose asChild>
                             <Button variant="ghost" size="icon" className="rounded-full">
                                 <X className="h-6 w-6" />
@@ -113,7 +129,7 @@ export function SideNav() {
                        </SheetClose>
                     </SheetHeader>
                     <div className="p-4">
-                      <NavLinks activeSection={activeSection} onLinkClick={() => setIsMobileMenuOpen(false)} isMobile={true} />
+                      <NavLinks activeSection={activeSection} onLinkClick={handleMobileLinkClick} isMobile={true} />
                     </div>
                     <div className="mt-auto text-center p-6 bg-background/50">
                         <p className="font-display text-3xl text-primary">Eloisa &amp; Jean</p>
