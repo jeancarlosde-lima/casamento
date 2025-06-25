@@ -17,8 +17,8 @@ export default {
     },
     extend: {
       backgroundImage: {
-        'hero-mobile': "url('https://i.imgur.com/BUZYlpb.jpg')",
-        'hero-desktop': "url('https://i.imgur.com/jhjjqj7.jpg')",
+        'hero-mobile': "url('https://i.imgur.com/jhjjqj7.jpg')",
+        'hero-desktop': "url('https://i.imgur.com/TitKk70.jpg')",
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'serif'],
