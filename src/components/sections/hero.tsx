@@ -14,7 +14,7 @@ export function HeroSection() {
       <div className="absolute inset-0 z-10 bg-foreground/40" />
 
       {/* Conteúdo acima da imagem */}
-      <div className="relative z-20 p-4 animate-fade-in container flex h-full flex-col justify-center items-center">
+      <div className="relative z-20 p-4 animate-fade-in container flex h-full flex-col justify-center items-center md:justify-end md:pb-24">
         <div className="flex flex-col items-center text-center">
             <p className="text-lg md:text-xl text-white/80 uppercase tracking-wider">
               Convite de casamento de:

@@ -20,9 +20,13 @@ function NavLinks({ activeSection, onLinkClick, isMobile = false }: { activeSect
     
     const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
         event.preventDefault();
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (id === 'hero') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
         if (onLinkClick) {
             onLinkClick(id);
@@ -78,23 +82,17 @@ export function SideNav() {
 
   const handleScroll = useCallback(() => {
     const offset = window.innerHeight * 0.4;
-    // Default to hero, this will be the case when at the very top of the page.
     let newActiveSection = 'hero'; 
 
-    // Iterate backwards from the last nav item.
     for (let i = navItems.length - 1; i >= 0; i--) {
       const item = navItems[i];
       const element = document.getElementById(item.id);
 
       if (element) {
         const rect = element.getBoundingClientRect();
-        
-        // If the top of the section is above our designated offset line in the viewport,
-        // we consider it the current section. Since we're iterating backwards,
-        // the first one we find is the one we want.
         if (rect.top <= offset) {
           newActiveSection = item.id;
-          break; // Found the active section, no need to check further.
+          break;
         }
       }
     }
@@ -106,7 +104,7 @@ export function SideNav() {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
+    handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
