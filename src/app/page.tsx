@@ -1,5 +1,4 @@
 import PageFooter from '@/components/page-footer';
-import PageHeader from '@/components/page-header';
 import { EventDetailsSection } from '@/components/sections/event-details';
 import { GallerySection } from '@/components/sections/gallery';
 import { HeroSection } from '@/components/sections/hero';
@@ -8,11 +7,12 @@ import { QuoteSection } from '@/components/sections/quote';
 import { RsvpSection } from '@/components/sections/rsvp';
 import { AnimatedSection } from '@/components/animated-section';
 import { GiftRegistrySection } from '@/components/sections/gift-registry';
+import { SideNav } from '@/components/side-nav';
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <PageHeader />
+      <SideNav />
       <main className="flex-1">
         <HeroSection />
         <div className="relative z-20 bg-card">
