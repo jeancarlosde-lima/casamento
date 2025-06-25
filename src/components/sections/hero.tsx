@@ -7,7 +7,7 @@ export function HeroSection() {
       className="sticky top-0 z-10 h-screen flex items-center justify-center text-center text-white py-20"
     >
       <div
-        className="absolute inset-0 bg-contain bg-no-repeat bg-center bg-foreground"
+        className="absolute inset-0 bg-cover bg-no-repeat bg-center bg-foreground"
         style={{ backgroundImage: "url('https://i.imgur.com/TitKk70.jpg')" }}
       />
       {/* Overlay escurecendo a imagem */}
