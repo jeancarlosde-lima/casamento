@@ -6,6 +6,7 @@ export function HeroSection() {
       id="hero"
       className="sticky top-0 z-10 flex h-screen items-center justify-center bg-foreground/20 py-20 text-center text-white"
     >
+      {/* Use a vertical image for mobile, and the horizontal one for desktop */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('https://i.imgur.com/Z7a4G6c.jpg')] md:bg-[url('https://i.imgur.com/TitKk70.jpg')]"
       />
@@ -17,7 +18,7 @@ export function HeroSection() {
         <p className="whitespace-nowrap text-lg md:text-xl text-white/80 uppercase tracking-wider mb-4">
           Convite de casamento de:
         </p>
-        <h1 className="font-display text-[12vw] sm:text-6xl md:text-8xl lg:text-9xl drop-shadow-lg leading-tight whitespace-nowrap">
+        <h1 className="font-display text-[clamp(2.5rem,12vw,4rem)] sm:text-6xl md:text-8xl lg:text-9xl drop-shadow-lg leading-tight whitespace-nowrap">
           Eloisa &amp; Jean
         </h1>
         <p className="mt-8 text-xl md:text-2xl text-white/80 font-light italic">
