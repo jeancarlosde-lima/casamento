@@ -14,13 +14,12 @@ export function HeroSection() {
       <div className="absolute inset-0 z-10 bg-foreground/40" />
 
       {/* Conteúdo acima da imagem */}
-      <div className="relative z-20 p-4 animate-fade-in container flex h-full flex-col justify-between py-12 md:py-20">
-        <p className="whitespace-nowrap text-lg md:text-xl text-white/80 uppercase tracking-wider">
-          Convite de casamento de:
-        </p>
-
-        <div>
-            <h1 className="font-display text-[clamp(2.5rem,12vw,4rem)] sm:text-6xl md:text-8xl lg:text-9xl drop-shadow-lg leading-tight whitespace-nowrap">
+      <div className="relative z-20 p-4 animate-fade-in container flex h-full flex-col justify-center items-center">
+        <div className="flex flex-col items-center text-center">
+            <p className="text-lg md:text-xl text-white/80 uppercase tracking-wider">
+              Convite de casamento de:
+            </p>
+            <h1 className="mt-2 font-display text-[clamp(2.5rem,10vw,4rem)] sm:text-6xl md:text-8xl lg:text-9xl drop-shadow-lg leading-tight whitespace-nowrap">
               Eloisa &amp; Jean
             </h1>
             <p className="mt-2 text-xl md:text-2xl text-white/80 font-light italic">
