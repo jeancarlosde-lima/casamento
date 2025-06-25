@@ -7,14 +7,15 @@ export function HeroSection() {
       className="sticky top-0 z-10 h-screen flex items-center justify-center text-center text-white py-20"
     >
       <div
-        className="absolute inset-0 bg-cover bg-no-repeat bg-[url('https://i.imgur.com/TitKk70.jpg')] bg-center md:bg-[60%_30%]"
+        className="absolute inset-0 bg-cover bg-no-repeat bg-center md:bg-[60%_30%]"
+        style={{ backgroundImage: "url('https://i.imgur.com/TitKk70.jpg')" }}
       />
       {/* Overlay escurecendo a imagem */}
       <div className="absolute inset-0 z-10 bg-foreground/40" />
 
       {/* Conteúdo acima da imagem */}
       <div className="relative z-20 p-4 animate-fade-in container">
-        <p className="text-lg md:text-xl text-white/80 uppercase tracking-wider mb-4">
+        <p className="whitespace-nowrap text-lg md:text-xl text-white/80 uppercase tracking-wider mb-4">
           Convite de casamento de:
         </p>
         <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl drop-shadow-lg leading-tight">

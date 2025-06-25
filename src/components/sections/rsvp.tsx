@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useEffect, useRef } from 'react';
+import { useActionState, useEffect, useRef, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { RsvpState, submitRsvp } from '@/app/actions';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Heart, Send } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -26,6 +27,11 @@ export function RsvpSection() {
   const [state, dispatch] = useActionState(submitRsvp, initialState);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     if (state.message && !state.success) {
@@ -44,7 +50,7 @@ export function RsvpSection() {
     }
   }, [state, toast]);
   
-  if (state.success) {
+  if (isClient && state.success) {
     return (
       <div className="container max-w-lg text-center">
         <Card className="shadow-lg p-8 bg-background rounded-2xl">
@@ -72,21 +78,35 @@ export function RsvpSection() {
       </div>
       <Card className="shadow-lg bg-background rounded-2xl stagger-item" style={{'--delay': '150ms'} as React.CSSProperties}>
         <CardContent className="p-8">
-          <form ref={formRef} action={dispatch} className="space-y-6" suppressHydrationWarning={true}>
-            <div className="space-y-2">
-              <Label htmlFor="name">Nome Completo</Label>
-              <Input id="name" name="name" placeholder="Seu nome completo" required className="bg-card rounded-lg focus:border-primary" />
-              {state.errors?.name && <p className="text-sm font-medium text-destructive">{state.errors.name[0]}</p>}
+          {!isClient ? (
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-24 rounded-md" />
+                <Skeleton className="h-10 w-full rounded-lg" />
+              </div>
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-48 rounded-md" />
+                <Skeleton className="h-20 w-full rounded-lg" />
+              </div>
+              <Skeleton className="h-[68px] w-full rounded-full" />
             </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="message">Mensagem Especial (Opcional)</Label>
-              <Textarea id="message" name="message" placeholder="Deixe uma mensagem carinhosa para os noivos..." rows={3} className="bg-card rounded-lg focus:border-primary" />
-              {state.errors?.message && <p className="text-sm font-medium text-destructive">{state.errors.message[0]}</p>}
-            </div>
-            
-            <SubmitButton />
-          </form>
+          ) : (
+            <form ref={formRef} action={dispatch} className="space-y-6" suppressHydrationWarning={true}>
+              <div className="space-y-2">
+                <Label htmlFor="name">Nome Completo</Label>
+                <Input id="name" name="name" placeholder="Seu nome completo" required className="bg-card rounded-lg focus:border-primary" />
+                {state.errors?.name && <p className="text-sm font-medium text-destructive">{state.errors.name[0]}</p>}
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="message">Mensagem Especial (Opcional)</Label>
+                <Textarea id="message" name="message" placeholder="Deixe uma mensagem carinhosa para os noivos..." rows={3} className="bg-card rounded-lg focus:border-primary" />
+                {state.errors?.message && <p className="text-sm font-medium text-destructive">{state.errors.message[0]}</p>}
+              </div>
+              
+              <SubmitButton />
+            </form>
+          )}
         </CardContent>
       </Card>
     </div>
