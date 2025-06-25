@@ -4,10 +4,10 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="sticky top-0 z-10 flex h-[75vh] items-center justify-center py-20 text-center text-white md:h-screen"
+      className="sticky top-0 z-10 flex h-screen items-center justify-center py-20 text-center text-white"
     >
       <div
-        className="absolute inset-0 bg-contain bg-center bg-no-repeat bg-foreground md:bg-cover"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('https://i.imgur.com/TitKk70.jpg')" }}
       />
       {/* Overlay escurecendo a imagem */}
