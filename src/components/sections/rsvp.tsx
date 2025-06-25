@@ -72,7 +72,7 @@ export function RsvpSection() {
       </div>
       <Card className="shadow-lg bg-background rounded-2xl stagger-item" style={{'--delay': '150ms'} as React.CSSProperties}>
         <CardContent className="p-8">
-          <form ref={formRef} action={dispatch} className="space-y-6">
+          <form ref={formRef} action={dispatch} className="space-y-6" suppressHydrationWarning={true}>
             <div className="space-y-2">
               <Label htmlFor="name">Nome Completo</Label>
               <Input id="name" name="name" placeholder="Seu nome completo" required className="bg-card rounded-lg focus:border-primary" />
