@@ -11,16 +11,16 @@ export function HeroSection() {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat md:bg-hero-desktop bg-hero-mobile"
       />
       {/* Overlay escurecendo a imagem */}
-      <div className="absolute inset-0 z-10 bg-foreground/40" />
+      <div className="absolute inset-0 z-10 bg-foreground/60" />
 
       {/* Conteúdo acima da imagem */}
-      <div className="relative z-20 p-4 animate-fade-in container flex h-full flex-col justify-center items-center md:justify-end md:pb-24">
+      <div className="relative z-20 p-4 animate-fade-in container flex h-full flex-col justify-center items-center md:justify-end md:pb-16">
         <div className="flex flex-col items-center text-center">
             <p className="text-lg md:text-xl text-white/80 uppercase tracking-wider">
               Convite de casamento de:
             </p>
-            <h1 className="mt-2 font-display text-[clamp(2.5rem,10vw,4rem)] sm:text-6xl md:text-8xl lg:text-9xl drop-shadow-lg leading-tight whitespace-nowrap">
-              Eloisa &amp; Jean
+            <h1 className="hero-title mt-2 font-display text-[clamp(2.5rem,10vw,4rem)] sm:text-6xl md:text-8xl lg:text-9xl drop-shadow-lg leading-tight whitespace-nowrap">
+              Eloisa <i>&amp;</i> Jean
             </h1>
             <p className="mt-2 text-xl md:text-2xl text-white/80 font-light italic">
               10 de outubro de 2026

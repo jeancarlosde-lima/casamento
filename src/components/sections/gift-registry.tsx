@@ -12,7 +12,7 @@ export function GiftRegistrySection() {
           Sua presença é o maior presente! Mas se você também quiser nos presentear, ficamos felizes em oferecer algumas opções com muito carinho.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
         {/* Card da Lista de Presentes */}
         <div className="stagger-item" style={{'--delay': '150ms'} as React.CSSProperties}>
             <Card className="shadow-lg bg-card rounded-2xl text-center h-full flex flex-col">

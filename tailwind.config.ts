@@ -21,9 +21,9 @@ export default {
         'hero-desktop': "url('https://i.imgur.com/TitKk70.jpg')",
       },
       fontFamily: {
-        sans: ['var(--font-sans)', 'serif'],
-        display: ['var(--font-display)', 'cursive'],
-        poppins: ['var(--font-poppins)', 'sans-serif'],
+        sans: ['var(--font-sans)', 'sans-serif'],
+        display: ['var(--font-display)', 'serif'],
+        'secondary-display': ['var(--font-secondary-display)', 'cursive'],
         code: ['monospace'],
       },
       colors: {
