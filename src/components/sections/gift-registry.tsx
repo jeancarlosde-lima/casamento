@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Gift, QrCode, Copy } from 'lucide-react';
@@ -28,7 +29,7 @@ export function GiftRegistrySection() {
                 </p>
                 <div className="bg-white p-4 rounded-lg shadow-inner mb-4 flex-1 flex items-center justify-center">
                   <Image
-                    src="https://i.imgur.com/gK22a0p.png"
+                    src="/images/gift-list-image.png"
                     alt="Ilustração de presentes para casa"
                     width={180}
                     height={180}
