@@ -4,7 +4,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="sticky top-0 z-10 flex h-screen justify-center bg-foreground/20 text-center text-white"
+      className="sticky top-0 z-10 flex h-screen justify-center bg-foreground/20 text-center"
     >
       {/* Use a vertical image for mobile, and the horizontal one for desktop */}
       <div
@@ -19,7 +19,7 @@ export function HeroSection() {
             <p className="text-lg md:text-xl text-white/80 uppercase tracking-wider">
               Convite de casamento de:
             </p>
-            <h1 className="hero-title mt-2 font-display text-[clamp(2.5rem,10vw,4rem)] sm:text-6xl md:text-8xl lg:text-9xl drop-shadow-lg leading-tight whitespace-nowrap">
+            <h1 className="hero-title mt-2 font-display text-[clamp(2.5rem,10vw,4rem)] sm:text-6xl md:text-8xl lg:text-9xl text-white drop-shadow-lg leading-tight whitespace-nowrap">
               Eloisa <i>&amp;</i> Jean
             </h1>
             <p className="mt-2 text-xl md:text-2xl text-white/80 font-light italic">

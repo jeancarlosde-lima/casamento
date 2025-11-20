@@ -26,11 +26,13 @@ export function GiftRegistrySection() {
                 <p className="text-muted-foreground mb-6">
                     Para acessar nossa lista de presentes em loja, basta clicar no botão abaixo. Agradecemos de coração por fazer parte deste momento!
                 </p>
-                <Button asChild size="lg" className="rounded-full mt-auto">
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                    Ver Lista de Presentes
-                    </a>
-                </Button>
+                <div className="mt-auto pt-4">
+                  <Button asChild size="lg" className="rounded-full">
+                      <a href="#" target="_blank" rel="noopener noreferrer">
+                      Ver Lista de Presentes
+                      </a>
+                  </Button>
+                </div>
                 </CardContent>
             </Card>
         </div>
