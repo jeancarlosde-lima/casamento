@@ -115,7 +115,7 @@ export function RsvpSection() {
               </div>
               
               <Button type="submit" disabled={isSubmitting || isUserLoading} size="lg" className="w-full text-lg py-7 rounded-full shadow-lg hover:shadow-primary/40 transition-shadow">
-                {isSubmitting ? 'Enviando...' : 'Confirmar Presença e Enviar Mensagem'}
+                <span>{isSubmitting ? 'Enviando...' : 'Confirmar Presença e Enviar Mensagem'}</span>
                 <Send className="ml-2 h-5 w-5" />
             </Button>
             </form>
