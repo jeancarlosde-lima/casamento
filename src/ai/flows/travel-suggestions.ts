@@ -27,7 +27,6 @@ export type TravelSuggestionsOutput = z.infer<typeof TravelSuggestionsOutputSche
 const travelSuggestionsPrompt = ai.definePrompt({
     name: 'travelSuggestionsPrompt',
     input: { schema: TravelSuggestionsInputSchema },
-    output: { schema: TravelSuggestionsOutputSchema },
     prompt: `You are a helpful and friendly wedding travel assistant. Your goal is to provide useful and concise travel suggestions for guests attending a wedding.
 
 The wedding is on {{date}} at {{venue}}.
@@ -50,8 +49,31 @@ const travelSuggestionsFlow = ai.defineFlow(
         outputSchema: TravelSuggestionsOutputSchema,
     },
     async (input) => {
-        const { output } = await travelSuggestionsPrompt(input);
-        return output!;
+        const { output } = await travelSuggestions(input);
+        
+        if (!output) {
+            throw new Error("AI failed to generate suggestions.");
+        }
+
+        try {
+            // The output from the LLM is a string, so we need to parse it as JSON.
+            const parsedOutput = JSON.parse(output as string);
+            return TravelSuggestionsOutputSchema.parse(parsedOutput);
+        } catch (e) {
+            console.error("Failed to parse AI output:", e);
+            // If parsing fails, we'll try to extract the content manually as a fallback.
+            const hotelMatch = (output as string).match(/["']?hotelSuggestions["']?\s*:\s*["']([^"']*)["']/);
+            const transportMatch = (output as string).match(/["']?transportationSuggestions["']?\s*:\s*["']([^"']*)["']/);
+
+            if (hotelMatch && transportMatch) {
+                return {
+                    hotelSuggestions: hotelMatch[1].replace(/\\n/g, '\n'),
+                    transportationSuggestions: transportMatch[1].replace(/\\n/g, '\n'),
+                };
+            }
+            
+            throw new Error("Could not format AI suggestions correctly.");
+        }
     }
 );
 
