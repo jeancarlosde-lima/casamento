@@ -9,27 +9,32 @@ import { Menu, X } from 'lucide-react';
 const navItems = [
   { id: 'hero', title: 'Início' },
   { id: 'gallery', title: 'Galeria' },
-  { id: 'quote', title: 'Mensagem' },
   { id: 'event-details', title: 'O Casamento' },
   { id: 'our-story', title: 'Nossa História' },
   { id: 'rsvp', title: 'Confirmar Presença' },
   { id: 'gift-registry', title: 'Presentes' },
+  { id: 'guestbook', title: 'Livro de Visitas', href: '/guestbook' },
 ];
 
 function NavLinks({ activeSection, onLinkClick, isMobile = false }: { activeSection: string, onLinkClick?: (id: string) => void, isMobile?: boolean }) {
     
-    const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, item: (typeof navItems)[0]) => {
+        if (item.href) {
+          if (onLinkClick) onLinkClick(item.id);
+          return;
+        }
+
         event.preventDefault();
-        if (id === 'hero') {
+        if (item.id === 'hero') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
-            const element = document.getElementById(id);
+            const element = document.getElementById(item.id);
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
         if (onLinkClick) {
-            onLinkClick(id);
+            onLinkClick(item.id);
         }
     };
 
@@ -38,8 +43,8 @@ function NavLinks({ activeSection, onLinkClick, isMobile = false }: { activeSect
             {navItems.map(item => (
                 <li key={item.id} className="w-full">
                     <a
-                        href={`#${item.id}`}
-                        onClick={(e) => handleLinkClick(e, item.id)}
+                        href={item.href || `#${item.id}`}
+                        onClick={(e) => handleLinkClick(e, item)}
                         className={cn(
                             'group relative flex items-center transition-all duration-300',
                             isMobile ? 'gap-3 py-2 text-lg' : 'justify-center'
@@ -86,6 +91,8 @@ export function SideNav() {
 
     for (let i = navItems.length - 1; i >= 0; i--) {
       const item = navItems[i];
+      if (item.href) continue;
+
       const element = document.getElementById(item.id);
 
       if (element) {
@@ -100,6 +107,12 @@ export function SideNav() {
     if (window.scrollY === 0) {
       newActiveSection = 'hero';
     }
+    
+    const guestbookPath = '/guestbook';
+    if (window.location.pathname === guestbookPath) {
+        newActiveSection = 'guestbook';
+    }
+
 
     if (activeSection !== newActiveSection) {
       setActiveSection(newActiveSection);

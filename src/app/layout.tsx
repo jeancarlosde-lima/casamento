@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Playfair_Display, Aboreto, Poppins } from 'next/font/google';
+import { FirebaseClientProvider } from '@/firebase/client-provider';
 
 const sansFont = Poppins({
   subsets: ['latin'],
@@ -39,7 +40,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning className={`${sansFont.variable} ${displayFont.variable} ${secondaryDisplayFont.variable}`}>
       <body className={cn("min-h-screen bg-background font-sans antialiased")}>
-        {children}
+        <FirebaseClientProvider>
+          {children}
+        </FirebaseClientProvider>
         <Toaster />
       </body>
     </html>
