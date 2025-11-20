@@ -1,3 +1,4 @@
+'use client';
 import { Button } from '@/components/ui/button';
 
 export function HeroSection() {
@@ -16,13 +17,13 @@ export function HeroSection() {
       {/* Conteúdo acima da imagem */}
       <div className="relative z-20 p-4 animate-fade-in container flex h-full flex-col justify-center items-center md:justify-end md:pb-16">
         <div className="flex flex-col items-center text-center">
-            <p className="text-lg md:text-xl text-white/80 uppercase tracking-wider">
+            <p className="text-lg md:text-xl text-white/80 uppercase tracking-wider mb-2">
               Convite de casamento de:
             </p>
-            <h1 className="hero-title mt-2 font-display text-[clamp(2.5rem,10vw,4rem)] sm:text-6xl md:text-8xl lg:text-9xl text-white drop-shadow-lg leading-tight whitespace-nowrap">
+            <h1 className="hero-title mt-2 font-display text-[clamp(2.5rem,10vw,4rem)] sm:text-6xl md:text-8xl lg:text-9xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] leading-tight whitespace-nowrap">
               Eloisa <i>&amp;</i> Jean
             </h1>
-            <p className="mt-2 text-xl md:text-2xl text-white/80 font-light italic">
+            <p className="mt-4 text-xl md:text-2xl text-white/80 font-light italic">
               10 de outubro de 2026
             </p>
             <p className="mt-4 text-base md:text-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
