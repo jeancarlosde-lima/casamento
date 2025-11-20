@@ -30,7 +30,7 @@ export function GiftRegistrySection() {
                 <div className="bg-white p-4 rounded-lg shadow-inner mb-4 flex-1 flex items-center justify-center">
                   <Image
                     src="/images/trindade-santa-bg.png.png"
-                    alt="Ilustração de presentes para casa"
+                    alt="Ilustração da Santíssima Trindade"
                     width={180}
                     height={180}
                     className="object-contain"
