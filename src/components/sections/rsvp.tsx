@@ -53,7 +53,7 @@ export function RsvpSection() {
   if (isClient && state.success) {
     return (
       <div className="container max-w-lg text-center">
-        <Card className="shadow-lg p-8 bg-background rounded-2xl">
+        <Card className="shadow-lg p-8 bg-card rounded-2xl">
             <CardHeader>
                 <div className="mx-auto bg-primary rounded-full p-4 w-fit text-primary-foreground mb-4">
                     <Heart className="h-10 w-10" />
@@ -76,7 +76,7 @@ export function RsvpSection() {
               Sua presença é o maior presente que podemos receber. Por favor, confirme sua participação até 1º de setembro de 2026 para que possamos planejar este momento especial com todo carinho.
           </p>
       </div>
-      <Card className="shadow-lg bg-background rounded-2xl stagger-item" style={{'--delay': '150ms'} as React.CSSProperties}>
+      <Card className="shadow-lg bg-card rounded-2xl stagger-item" style={{'--delay': '150ms'} as React.CSSProperties}>
         <CardContent className="p-8">
           {!isClient ? (
             <div className="space-y-6">
@@ -94,13 +94,13 @@ export function RsvpSection() {
             <form ref={formRef} action={dispatch} className="space-y-6" suppressHydrationWarning={true}>
               <div className="space-y-2">
                 <Label htmlFor="name">Nome Completo</Label>
-                <Input id="name" name="name" placeholder="Seu nome completo" required className="bg-card rounded-lg focus:border-primary" />
+                <Input id="name" name="name" placeholder="Seu nome completo" required className="bg-background rounded-lg focus:border-primary" />
                 {state.errors?.name && <p className="text-sm font-medium text-destructive">{state.errors.name[0]}</p>}
               </div>
               
               <div className="space-y-2">
                 <Label htmlFor="message">Mensagem Especial (Opcional)</Label>
-                <Textarea id="message" name="message" placeholder="Deixe uma mensagem carinhosa para os noivos..." rows={3} className="bg-card rounded-lg focus:border-primary" />
+                <Textarea id="message" name="message" placeholder="Deixe uma mensagem carinhosa para os noivos..." rows={3} className="bg-background rounded-lg focus:border-primary" />
                 {state.errors?.message && <p className="text-sm font-medium text-destructive">{state.errors.message[0]}</p>}
               </div>
               

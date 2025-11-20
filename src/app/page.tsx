@@ -15,7 +15,7 @@ export default function Home() {
       <SideNav />
       <main className="flex-1">
         <HeroSection />
-        <div className="relative z-20 bg-card">
+        <div className="relative z-20 bg-background">
           <AnimatedSection className="py-16 md:py-32 text-center">
             <div className="container">
               <h2 className="font-display text-4xl md:text-6xl max-w-4xl mx-auto text-foreground">
@@ -26,19 +26,19 @@ export default function Home() {
           <AnimatedSection id="gallery" className="py-16 md:py-24 bg-card">
             <GallerySection />
           </AnimatedSection>
-          <AnimatedSection id="quote" className="py-16 md:py-24 bg-card">
+          <AnimatedSection id="quote" className="py-16 md:py-24 bg-background">
             <QuoteSection />
           </AnimatedSection>
-          <AnimatedSection id="event-details" className="py-16 md:py-24 bg-background use-stagger">
+          <AnimatedSection id="event-details" className="py-16 md:py-24 bg-card use-stagger">
             <EventDetailsSection />
           </AnimatedSection>
-          <AnimatedSection id="our-story" className="py-16 md:py-24 bg-card use-stagger">
+          <AnimatedSection id="our-story" className="py-16 md:py-24 bg-background use-stagger">
             <OurStorySection />
           </AnimatedSection>
-          <AnimatedSection id="rsvp" className="py-16 md:py-24 bg-background use-stagger">
+          <AnimatedSection id="rsvp" className="py-16 md:py-24 bg-card use-stagger">
             <RsvpSection />
           </AnimatedSection>
-          <AnimatedSection id="gift-registry" className="py-16 md:py-24 bg-card use-stagger">
+          <AnimatedSection id="gift-registry" className="py-16 md:py-24 bg-background use-stagger">
             <GiftRegistrySection />
           </AnimatedSection>
         </div>

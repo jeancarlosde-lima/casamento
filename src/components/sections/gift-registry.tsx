@@ -11,7 +11,7 @@ export function GiftRegistrySection() {
           Sua presença é o maior presente! Mas se você também quiser nos presentear, preparamos uma lista de presentes com muito carinho.
         </p>
       </div>
-      <Card className="shadow-lg bg-background rounded-2xl text-center stagger-item" style={{'--delay': '150ms'} as React.CSSProperties}>
+      <Card className="shadow-lg bg-card rounded-2xl text-center stagger-item" style={{'--delay': '150ms'} as React.CSSProperties}>
         <CardHeader className="items-center pt-8">
           <div className="mx-auto bg-primary rounded-full p-4 w-fit text-primary-foreground mb-4">
             <Gift className="h-10 w-10" />
