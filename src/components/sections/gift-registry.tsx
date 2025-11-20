@@ -22,12 +22,21 @@ export function GiftRegistrySection() {
                 </div>
                 <CardTitle className="font-display text-3xl">Nossa Lista</CardTitle>
                 </CardHeader>
-                <CardContent className="p-8 pt-4 flex flex-col flex-1">
+                <CardContent className="p-8 pt-4 flex flex-col flex-1 items-center">
                 <p className="text-muted-foreground mb-6">
                     Para acessar nossa lista de presentes em loja, basta clicar no botão abaixo. Agradecemos de coração por fazer parte deste momento!
                 </p>
-                <div className="mt-auto pt-4">
-                  <Button asChild size="lg" className="rounded-full">
+                <div className="flex-1 flex items-center justify-center py-4">
+                  <Image
+                    src="https://i.imgur.com/B6xX83O.png"
+                    alt="Ilustração de loja de presentes"
+                    width={180}
+                    height={180}
+                    className="object-contain rounded-lg opacity-80"
+                  />
+                </div>
+                <div className="mt-auto w-full pt-4">
+                  <Button asChild size="lg" className="rounded-full w-full">
                       <a href="#" target="_blank" rel="noopener noreferrer">
                       Ver Lista de Presentes
                       </a>
@@ -50,7 +59,7 @@ export function GiftRegistrySection() {
                     <p className="text-muted-foreground mb-4">
                         Se preferir, você pode nos presentear diretamente via PIX. Aponte a câmera do seu celular para o QR Code abaixo.
                     </p>
-                    <div className="bg-white p-4 rounded-lg shadow-inner mb-4">
+                    <div className="bg-white p-4 rounded-lg shadow-inner mb-4 flex-1 flex items-center justify-center">
                         <Image
                             // IMPORTANTE: Substitua este link pelo seu QR Code PIX
                             src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Commons_QR_code.png"
@@ -60,7 +69,7 @@ export function GiftRegistrySection() {
                             className="object-contain"
                         />
                     </div>
-                     <p className="text-muted-foreground text-sm mb-4">Ou use a chave aleatória:</p>
+                     <p className="text-muted-foreground text-sm mb-4 mt-4">Ou use a chave aleatória:</p>
                     <Button variant="secondary" size="lg" className="rounded-full w-full mt-auto">
                         <Copy className="mr-2 h-4 w-4" />
                         Copiar Chave PIX
