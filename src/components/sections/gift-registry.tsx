@@ -16,7 +16,7 @@ export function GiftRegistrySection() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
         {/* Card da Lista de Presentes */}
         <div className="stagger-item" style={{'--delay': '150ms'} as React.CSSProperties}>
-            <Card className="shadow-lg bg-card rounded-2xl text-center h-full flex flex-col">
+            <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-2 bg-card rounded-2xl text-center h-full flex flex-col">
                 <CardHeader className="items-center pt-8">
                 <div className="mx-auto bg-primary rounded-full p-4 w-fit text-primary-foreground mb-4">
                     <Gift className="h-10 w-10" />
@@ -49,7 +49,7 @@ export function GiftRegistrySection() {
 
         {/* Card do PIX */}
         <div className="stagger-item" style={{'--delay': '300ms'} as React.CSSProperties}>
-            <Card className="shadow-lg bg-card rounded-2xl text-center h-full flex flex-col">
+            <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-2 bg-card rounded-2xl text-center h-full flex flex-col">
                 <CardHeader className="items-center pt-8">
                 <div className="mx-auto bg-primary rounded-full p-4 w-fit text-primary-foreground mb-4">
                     <QrCode className="h-10 w-10" />
