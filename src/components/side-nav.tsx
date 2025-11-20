@@ -14,6 +14,7 @@ const navItems = [
   { id: 'our-story', title: 'Nossa História' },
   { id: 'rsvp', title: 'Confirmar Presença' },
   { id: 'gift-registry', title: 'Presentes' },
+  { id: 'travel-assistant', title: 'Assist. de Viagem' },
 ];
 
 function NavLinks({ activeSection, onLinkClick, isMobile = false }: { activeSection: string, onLinkClick?: (id: string) => void, isMobile?: boolean }) {
@@ -95,6 +96,10 @@ export function SideNav() {
           break;
         }
       }
+    }
+
+    if (window.scrollY === 0) {
+      newActiveSection = 'hero';
     }
 
     if (activeSection !== newActiveSection) {
