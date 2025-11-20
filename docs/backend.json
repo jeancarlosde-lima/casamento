@@ -1,0 +1,62 @@
+{
+  "entities": {
+    "GuestBookEntry": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "GuestBookEntry",
+      "type": "object",
+      "description": "Represents a guest book entry for the wedding invitation website.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the GuestBookEntry entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the guest leaving the message."
+        },
+        "message": {
+          "type": "string",
+          "description": "The message left by the guest."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the message was created.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "message",
+        "createdAt"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "guest_book_entries/{guestBookEntryId}",
+        "definition": {
+          "entityName": "GuestBookEntry",
+          "schema": {
+            "$ref": "#/backend/entities/GuestBookEntry"
+          },
+          "description": "Stores guest book entries for the wedding invitation website.",
+          "params": [
+            {
+              "name": "guestBookEntryId",
+              "description": "The unique identifier for each guest book entry."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The data structure is designed to store guest book entries for the wedding invitation. It uses a single collection `guest_book_entries` to store all entries. This approach prioritizes simplicity and avoids unnecessary complexity, as all entries share the same security requirements (any user can create an entry).  Authorization Independence is achieved because there are no hierarchical dependencies; each guest book entry is self-contained and doesn't rely on data from other documents or collections for authorization. This enables atomic operations and simplifies security rules. To enable secure list operations (QAPs), there are no filters required as there is a single collection for guest book entries and no other roles or access levels are used."
+  }
+}
