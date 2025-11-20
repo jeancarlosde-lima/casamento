@@ -8,7 +8,6 @@ import { RsvpSection } from '@/components/sections/rsvp';
 import { AnimatedSection } from '@/components/animated-section';
 import { GiftRegistrySection } from '@/components/sections/gift-registry';
 import { SideNav } from '@/components/side-nav';
-import { TravelAssistantSection } from '@/components/sections/travel-assistant';
 
 export default function Home() {
   return (
@@ -41,9 +40,6 @@ export default function Home() {
           </AnimatedSection>
           <AnimatedSection id="gift-registry" className="py-16 md:py-24 bg-background use-stagger">
             <GiftRegistrySection />
-          </AnimatedSection>
-          <AnimatedSection id="travel-assistant" className="py-16 md:py-24 bg-card">
-            <TravelAssistantSection />
           </AnimatedSection>
         </div>
       </main>

@@ -1,0 +1,88 @@
+{
+  "gallery": [
+    {
+      "text": "Nosso primeiro encontro",
+      "hint": "couple date",
+      "seed": 1,
+      "width": 400,
+      "height": 500
+    },
+    {
+      "text": "O pedido de casamento",
+      "hint": "marriage proposal",
+      "seed": 2,
+      "width": 400,
+      "height": 500
+    },
+    {
+      "text": "Momentos especiais",
+      "hint": "special moments",
+      "seed": 3,
+      "width": 400,
+      "height": 500
+    },
+    {
+      "text": "Nossa jornada juntos",
+      "hint": "couple journey",
+      "seed": 4,
+      "width": 400,
+      "height": 500
+    },
+    {
+      "text": "Preparativos do casamento",
+      "hint": "wedding planning",
+      "seed": 5,
+      "width": 400,
+      "height": 500
+    },
+    {
+      "text": "Família e amigos",
+      "hint": "family friends",
+      "seed": 6,
+      "width": 400,
+      "height": 500
+    },
+    {
+      "text": "Conteúdo que ressoa com nossa frequência",
+      "hint": "abstract love",
+      "seed": 7,
+      "width": 400,
+      "height": 500
+    },
+    {
+      "text": "Valor para vocês, não de vocês",
+      "hint": "friends celebration",
+      "seed": 8,
+      "width": 400,
+      "height": 500
+    },
+    {
+      "text": "Uma celebração de empoderamento",
+      "hint": "empowerment",
+      "seed": 9,
+      "width": 400,
+      "height": 500
+    },
+    {
+      "text": "Compartilhando nossa história",
+      "hint": "sharing story",
+      "seed": 10,
+      "width": 400,
+      "height": 500
+    },
+    {
+      "text": "Criando memórias juntos",
+      "hint": "making memories",
+      "seed": 11,
+      "width": 400,
+      "height": 500
+    },
+    {
+      "text": "O poder que exercemos",
+      "hint": "couple power",
+      "seed": 12,
+      "width": 400,
+      "height": 500
+    }
+  ]
+}

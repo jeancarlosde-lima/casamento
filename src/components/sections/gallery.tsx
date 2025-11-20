@@ -6,25 +6,11 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { Button } from '../ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import galleryItems from '@/lib/placeholder-images.json';
 
-const galleryItems = [
-    { text: "Nosso primeiro encontro", hint: "couple date" },
-    { text: "O pedido de casamento", hint: "marriage proposal" },
-    { text: "Momentos especiais", hint: "special moments" },
-    { text: "Nossa jornada juntos", hint: "couple journey" },
-    { text: "Preparativos do casamento", hint: "wedding planning" },
-    { text: "Família e amigos", hint: "family friends" },
-    { text: "Conteúdo que ressoa com nossa frequência", hint: "abstract love" },
-    { text: "Valor para vocês, não de vocês", hint: "friends celebration" },
-    { text: "Uma celebração de empoderamento", hint: "empowerment" },
-    { text: "Compartilhando nossa história", hint: "sharing story" },
-    { text: "Criando memórias juntos", hint: "making memories" },
-    { text: "O poder que exercemos", hint: "couple power" },
-];
 
 export function GallerySection() {
-    const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string; hint: string } | null>(null);
+    const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string; hint: string; width: number; height: number; } | null>(null);
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' }, [
         Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true }),
     ]);
@@ -58,20 +44,21 @@ export function GallerySection() {
             <div className="embla group/gallery">
                 <div className="embla__viewport" ref={emblaRef}>
                     <div className="embla__container">
-                        {galleryItems.map((item, index) => {
-                            const src = `https://placehold.co/400x500.png`;
+                        {galleryItems.gallery.map((item, index) => {
+                            const src = `https://picsum.photos/seed/${item.seed}/${item.width}/${item.height}`;
                             return (
                                 <div className="embla__slide" key={index}>
                                     <button
-                                        onClick={() => setSelectedImage({ src, alt: item.text, hint: item.hint })}
+                                        onClick={() => setSelectedImage({ src, alt: item.text, hint: item.hint, width: item.width, height: item.height })}
                                         className="relative block aspect-[4/5] w-full rounded-2xl overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-4 focus:ring-offset-card transition-transform duration-300 ease-in-out hover:!scale-105 hover:-translate-y-1"
                                     >
                                         <Image
                                             src={src}
                                             alt={item.text}
                                             data-ai-hint={item.hint}
-                                            fill
-                                            className="object-cover"
+                                            width={item.width}
+                                            height={item.height}
+                                            className="object-cover w-full h-full"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent transition-opacity duration-300" />
                                         <div className="absolute bottom-0 left-0 p-4">
@@ -107,7 +94,7 @@ export function GallerySection() {
                                 <DialogTitle>{selectedImage.alt}</DialogTitle>
                                 <DialogDescription>Imagem ampliada de {selectedImage.alt}.</DialogDescription>
                             </DialogHeader>
-                            <div className="relative aspect-square md:aspect-video w-full">
+                            <div className="relative" style={{ aspectRatio: `${selectedImage.width} / ${selectedImage.height}`}}>
                                 <Image
                                     src={selectedImage.src}
                                     alt={selectedImage.alt}
