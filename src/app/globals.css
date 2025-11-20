@@ -86,6 +86,26 @@ html {
         background-clip: text;
         text-fill-color: transparent;
     }
+
+    .flip-book .page {
+        @apply bg-card shadow-lg flex items-center justify-center;
+    }
+
+    .flip-book .page-cover-content {
+         @apply flex flex-col items-center justify-center h-full;
+    }
+    
+    .flip-book .page-content {
+        @apply w-full h-full p-6 md:p-10 flex flex-col items-start;
+    }
+    
+    .flip-book .page-content .page-header {
+        @apply flex items-center gap-4 mb-4;
+    }
+    
+    .flip-book .page-footer {
+        @apply mt-auto text-center w-full font-display text-primary/70;
+    }
 }
 
 @layer utilities {
