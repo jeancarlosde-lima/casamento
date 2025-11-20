@@ -1,7 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 import { collection, query, orderBy } from 'firebase/firestore';
-import { useCollection, useFirestore, useUser, useAuth } from '@/firebase';
+import { useCollection, useFirestore, useUser, useAuth, useMemoFirebase } from '@/firebase';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { initiateAnonymousSignIn } from '@/firebase/non-blocking-login';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -29,10 +29,14 @@ export default function GuestbookPage() {
   const auth = useAuth();
   const { user, isUserLoading } = useUser();
 
-  const guestbookQuery = query(
-    collection(firestore, 'guest_book_entries'),
-    orderBy('createdAt', 'desc')
-  );
+  const guestbookQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(
+        collection(firestore, 'guest_book_entries'),
+        orderBy('createdAt', 'desc')
+    );
+  }, [firestore]);
+
 
   const { data: rsvps, isLoading } = useCollection<GuestBookEntry>(guestbookQuery);
 
