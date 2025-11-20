@@ -80,7 +80,7 @@ export default function GuestbookPage() {
 
   useEffect(() => {
     if (rsvps) {
-        setTotalPages(rsvps.length + 1); // +1 for the cover
+        setTotalPages(rsvps.length > 0 ? rsvps.length + 1 : 1); // +1 for the cover
     }
   }, [rsvps]);
 
@@ -118,6 +118,7 @@ export default function GuestbookPage() {
                 className="flip-book" 
                 style={{ width: '100%', maxWidth: `${bookWidth}px`, height: `${bookHeight}px`}}
             >
+              {rsvps && (
                 <HTMLFlipBook
                     width={bookWidth}
                     height={bookHeight}
@@ -140,7 +141,7 @@ export default function GuestbookPage() {
                         <p className="font-display text-4xl text-primary mt-8">Eloisa & Jean</p>
                     </PageCover>
 
-                    {rsvps && rsvps.map((rsvp, index) => (
+                    {rsvps.map((rsvp, index) => (
                         <Page key={rsvp.id} number={index + 1}>
                              <div className="page-header">
                                 <Avatar>
@@ -159,13 +160,14 @@ export default function GuestbookPage() {
                         </Page>
                     ))}
                 </HTMLFlipBook>
+              )}
             </div>
              <div className="flex items-center justify-center gap-4 mt-8">
                 <Button onClick={goToPrevPage} disabled={currentPage === 0} variant="outline" size="icon">
                     <ChevronLeft className="h-6 w-6" />
                 </Button>
                 <span className="text-muted-foreground font-medium">
-                    Página {currentPage} de {totalPages - 1}
+                    Página {currentPage} de {totalPages > 0 ? totalPages -1 : 0}
                 </span>
                 <Button onClick={goToNextPage} disabled={currentPage >= totalPages - 1} variant="outline" size="icon">
                     <ChevronRight className="h-6 w-6" />
