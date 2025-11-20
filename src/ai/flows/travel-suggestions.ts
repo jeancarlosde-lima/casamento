@@ -3,43 +3,45 @@
  * @fileoverview Flow for generating travel suggestions for wedding guests.
  *
  * This file defines the AI flow for providing hotel and transportation
- * suggestions to wedding guests based on their budget, interests, and the
- * event's location and date.
+ * suggestions to wedding guests based on their budget and interests,
+ * considering the fixed locations of the wedding ceremony and reception.
  */
 
 import { ai } from '@/ai/genkit';
 import { z } from 'zod';
 
 const TravelSuggestionsInputSchema = z.object({
-  budget: z.enum(['low', 'medium', 'high']).describe('The guest\'s budget level.'),
-  interests: z.string().optional().describe('The guest\'s preferences or interests (e.g., quiet, near restaurants).'),
-  venue: z.string().describe('The address of the wedding venue.'),
-  date: z.string().describe('The date of the wedding.'),
+  budget: z.enum(['low', 'medium', 'high']).describe("The guest's budget level."),
+  interests: z.string().optional().describe("The guest's preferences or interests (e.g., quiet, near restaurants)."),
 });
 export type TravelSuggestionsInput = z.infer<typeof TravelSuggestionsInputSchema>;
 
 const TravelSuggestionsOutputSchema = z.object({
-  hotelSuggestions: z.string().describe('Up to three hotel or accommodation suggestions, including name, a brief description, and estimated price range. The suggestions should be tailored to the provided budget and interests.'),
-  transportationSuggestions: z.string().describe('A few suggestions for transportation to the venue, considering the location and common options available in the area (e.g., ride-sharing, public transport, car rental).'),
+  hotelSuggestions: z.string().describe('Up to three hotel or accommodation suggestions, including name, a brief description, estimated price range, and a direct booking link (e.g., from Booking.com or similar). The suggestions should be tailored to the provided budget and interests.'),
+  transportationSuggestions: z.string().describe('A few suggestions for transportation between the ceremony and reception, and to the venues, considering the locations and common options available (e.g., ride-sharing, car rental).'),
 });
 export type TravelSuggestionsOutput = z.infer<typeof TravelSuggestionsOutputSchema>;
 
 const travelSuggestionsPrompt = ai.definePrompt({
     name: 'travelSuggestionsPrompt',
     input: { schema: TravelSuggestionsInputSchema },
+    output: { schema: TravelSuggestionsOutputSchema },
     prompt: `You are a helpful and friendly wedding travel assistant. Your goal is to provide useful and concise travel suggestions for guests attending a wedding.
 
-The wedding is on {{date}} at {{venue}}.
+The wedding has two locations:
+1. Ceremony: Paróquia Santos Apóstolos - R. Capela do Alto, 86 - Vila Virginia, Itaquaquecetuba - SP, 08576-150
+2. Reception: Sítio Recanto das Palmeiras - Estr. do Oura, 420 - Ipelândia, Suzano - SP, 08620-060
+The date is October 10, 2026.
 
 The guest has the following preferences:
 - Budget: {{budget}}
 - Interests: {{interests}}
 
 Based on this information, provide:
-1.  **Hotel Suggestions:** Suggest 2-3 hotels or accommodations. For each, provide the name, a one-sentence description, and an estimated price range that matches their budget.
-2.  **Transportation Ideas:** Suggest 1-2 practical ways for them to get to the venue on the wedding day.
+1.  **Hotel Suggestions:** Suggest 2-3 hotels or accommodations that are conveniently located for both venues. For each, provide the name, a one-sentence description, an estimated price range that matches their budget, and a direct booking link (e.g., from Booking.com, Google Travel, etc.). Format the output as plain text.
+2.  **Transportation Ideas:** Suggest 1-2 practical ways for them to get between the ceremony and the reception, and to the venues on the wedding day.
 
-Keep the tone warm, helpful, and celebratory. The output should be formatted as a JSON object with 'hotelSuggestions' and 'transportationSuggestions' keys.`,
+Keep the tone warm, helpful, and celebratory. Structure the response as a clear text output.`,
 });
 
 const travelSuggestionsFlow = ai.defineFlow(
@@ -49,31 +51,13 @@ const travelSuggestionsFlow = ai.defineFlow(
         outputSchema: TravelSuggestionsOutputSchema,
     },
     async (input) => {
-        const { output } = await travelSuggestions(input);
+        const { output } = await travelSuggestionsPrompt(input);
         
         if (!output) {
             throw new Error("AI failed to generate suggestions.");
         }
 
-        try {
-            // The output from the LLM is a string, so we need to parse it as JSON.
-            const parsedOutput = JSON.parse(output as string);
-            return TravelSuggestionsOutputSchema.parse(parsedOutput);
-        } catch (e) {
-            console.error("Failed to parse AI output:", e);
-            // If parsing fails, we'll try to extract the content manually as a fallback.
-            const hotelMatch = (output as string).match(/["']?hotelSuggestions["']?\s*:\s*["']([^"']*)["']/);
-            const transportMatch = (output as string).match(/["']?transportationSuggestions["']?\s*:\s*["']([^"']*)["']/);
-
-            if (hotelMatch && transportMatch) {
-                return {
-                    hotelSuggestions: hotelMatch[1].replace(/\\n/g, '\n'),
-                    transportationSuggestions: transportMatch[1].replace(/\\n/g, '\n'),
-                };
-            }
-            
-            throw new Error("Could not format AI suggestions correctly.");
-        }
+        return output;
     }
 );
 

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { travelSuggestions } from '@/ai/flows/travel-suggestions';
-import type { TravelSuggestionsOutput } from '@/ai/flows/travel-suggestions';
+import type { TravelSuggestionsInput, TravelSuggestionsOutput } from '@/ai/flows/travel-suggestions';
 import { useForm, type SubmitHandler, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -42,11 +42,7 @@ export function TravelAssistantSection() {
     setSuggestions(null);
     setError(null);
     try {
-      const result = await travelSuggestions({
-        ...data,
-        venue: 'Sítio Recanto das Palmeiras, Estr. do Oura, 420 - Ipelândia, Suzano - SP, 08620-060',
-        date: '10 de Outubro de 2026',
-      });
+      const result = await travelSuggestions(data);
       setSuggestions(result);
     } catch (err) {
       setError('Desculpe, tivemos um problema ao buscar as sugestões. Por favor, tente novamente.');
