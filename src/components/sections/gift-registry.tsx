@@ -23,20 +23,20 @@ export function GiftRegistrySection() {
                 <CardTitle className="font-display text-3xl">Nossa Lista</CardTitle>
                 </CardHeader>
                 <CardContent className="p-8 pt-4 flex flex-col flex-1 items-center">
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground mb-4">
                     Para acessar nossa lista de presentes em loja, basta clicar no botão abaixo. Agradecemos de coração por fazer parte deste momento!
                 </p>
-                <div className="flex-1 flex items-center justify-center py-4">
+                <div className="bg-white p-4 rounded-lg shadow-inner mb-4 flex-1 flex items-center justify-center">
                   <Image
-                    src="https://i.imgur.com/B6xX83O.png"
-                    alt="Ilustração de loja de presentes"
+                    src="https://i.imgur.com/gK22a0p.png"
+                    alt="Ilustração de presentes para casa"
                     width={180}
                     height={180}
-                    className="object-contain rounded-lg opacity-80"
+                    className="object-contain"
                   />
                 </div>
-                <div className="mt-auto w-full pt-4">
-                  <Button asChild size="lg" className="rounded-full w-full">
+                <div className="w-full">
+                  <Button asChild size="lg" className="rounded-full w-full mt-auto">
                       <a href="#" target="_blank" rel="noopener noreferrer">
                       Ver Lista de Presentes
                       </a>
@@ -69,7 +69,7 @@ export function GiftRegistrySection() {
                             className="object-contain"
                         />
                     </div>
-                     <p className="text-muted-foreground text-sm mb-4 mt-4">Ou use a chave aleatória:</p>
+                     <p className="text-muted-foreground text-sm mb-4">Ou use a chave aleatória:</p>
                     <Button variant="secondary" size="lg" className="rounded-full w-full mt-auto">
                         <Copy className="mr-2 h-4 w-4" />
                         Copiar Chave PIX
