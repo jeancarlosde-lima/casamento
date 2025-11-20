@@ -44,6 +44,15 @@ export function RsvpSection() {
         return;
     }
     
+    if (!firestore) {
+      toast({
+        variant: 'destructive',
+        title: 'Erro de conexão',
+        description: 'Não foi possível conectar ao banco de dados. Tente novamente.',
+      });
+      return;
+    }
+    
     setIsSubmitting(true);
 
     try {
@@ -114,8 +123,8 @@ export function RsvpSection() {
                 <Textarea id="message" name="message" placeholder="Deixe uma mensagem carinhosa para os noivos..." rows={3} className="bg-background rounded-lg focus:border-primary" onChange={(e) => setMessage(e.target.value)} />
               </div>
               
-              <Button type="submit" disabled={isSubmitting || isUserLoading} size="lg" className="w-full text-lg py-7 rounded-full shadow-lg hover:shadow-primary/40 transition-shadow">
-                <span>{isSubmitting ? 'Enviando...' : 'Confirmar Presença e Enviar Mensagem'}</span>
+              <Button type="submit" disabled={isSubmitting || isUserLoading} size="lg" className="w-full text-lg rounded-full shadow-lg hover:shadow-primary/40 transition-shadow">
+                {isSubmitting ? 'Enviando...' : 'Confirmar Presença e Enviar Mensagem'}
                 <Send className="ml-2 h-5 w-5" />
             </Button>
             </form>
