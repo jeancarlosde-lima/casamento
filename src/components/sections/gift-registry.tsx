@@ -12,20 +12,52 @@ const pixEmail = 'casamentoeloisaejean@gmail.com';
 export function GiftRegistrySection() {
   const { toast } = useToast();
 
-  const handleCopyPixKey = () => {
-    navigator.clipboard.writeText(pixKey).then(() => {
-      toast({
-        title: 'Chave PIX copiada!',
-        description: 'A chave "copia e cola" está na sua área de transferência.',
-      });
-    }).catch(err => {
-      console.error('Failed to copy PIX key: ', err);
+  const copyFallback = (text: string, successMessage: string) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.top = '-9999px';
+    textArea.style.left = '-9999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        toast({ title: successMessage });
+      } else {
+        throw new Error('Copy command was not successful');
+      }
+    } catch (err) {
+      console.error('Fallback copy method failed: ', err);
       toast({
         variant: 'destructive',
-        title: 'Oops!',
-        description: 'Não foi possível copiar a chave PIX.',
+        title: 'Oops! Não foi possível copiar.',
+        description: 'Seu navegador pode estar bloqueando esta ação. Por favor, copie manualmente.',
       });
-    });
+    }
+    document.body.removeChild(textArea);
+  }
+
+  const copyToClipboard = (text: string, successMessage: string) => {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(() => {
+        toast({ title: successMessage });
+      }).catch(err => {
+        console.warn('navigator.clipboard failed, trying fallback: ', err);
+        copyFallback(text, successMessage);
+      });
+    } else {
+      copyFallback(text, successMessage);
+    }
+  };
+
+  const handleCopyPixKey = () => {
+    copyToClipboard(pixKey, 'Chave PIX copiada!');
+  };
+
+  const handleCopyEmail = () => {
+    copyToClipboard(pixEmail, 'E-mail copiado!');
   };
 
   return (
@@ -41,31 +73,31 @@ export function GiftRegistrySection() {
         <div className="stagger-item" style={{'--delay': '150ms'} as React.CSSProperties}>
             <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-2 bg-card rounded-2xl text-center h-full flex flex-col">
                 <CardHeader className="items-center pt-8">
-                <div className="mx-auto bg-primary rounded-full p-4 w-fit text-primary-foreground mb-4">
-                    <Gift className="h-10 w-10" />
-                </div>
-                <CardTitle className="font-display text-3xl">Nossa Lista</CardTitle>
+                  <div className="mx-auto bg-primary rounded-full p-4 w-fit text-primary-foreground mb-4">
+                      <Gift className="h-10 w-10" />
+                  </div>
+                  <CardTitle className="font-display text-3xl">Nossa Lista</CardTitle>
                 </CardHeader>
                 <CardContent className="p-8 pt-4 flex flex-col flex-1 items-center">
-                <p className="text-muted-foreground mb-4">
-                    Para acessar nossa lista de presentes em loja, basta clicar no botão abaixo. Agradecemos de coração por fazer parte deste momento!
-                </p>
-                <div className="bg-white p-4 rounded-lg shadow-inner mb-4 flex-1 flex items-center justify-center">
-                  <Image
-                    src="/images/lista_dePresente.png"
-                    alt="Imagem ilustrativa de presentes para casa"
-                    width={180}
-                    height={180}
-                    className="object-contain"
-                  />
-                </div>
-                <div className="w-full">
-                  <Button asChild size="lg" className="rounded-full w-full mt-auto">
-                      <a href="#" target="_blank" rel="noopener noreferrer">
-                      Ver Lista de Presentes
-                      </a>
-                  </Button>
-                </div>
+                  <p className="text-muted-foreground mb-4">
+                      Para acessar nossa lista de presentes em loja, basta clicar no botão abaixo. Agradecemos de coração por fazer parte deste momento!
+                  </p>
+                  <div className="bg-white p-4 rounded-lg shadow-inner mb-4 flex-1 flex items-center justify-center">
+                    <Image
+                      src="/images/lista_dePresente.png"
+                      alt="Imagem ilustrativa de presentes para casa"
+                      width={180}
+                      height={180}
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Button asChild size="lg" className="rounded-full w-full mt-auto">
+                        <a href="#" target="_blank" rel="noopener noreferrer">
+                        Ver Lista de Presentes
+                        </a>
+                    </Button>
+                  </div>
                 </CardContent>
             </Card>
         </div>
@@ -74,10 +106,10 @@ export function GiftRegistrySection() {
         <div className="stagger-item" style={{'--delay': '300ms'} as React.CSSProperties}>
             <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-2 bg-card rounded-2xl text-center h-full flex flex-col">
                 <CardHeader className="items-center pt-8">
-                <div className="mx-auto bg-primary rounded-full p-4 w-fit text-primary-foreground mb-4">
-                    <QrCode className="h-10 w-10" />
-                </div>
-                <CardTitle className="font-display text-3xl">Presente em PIX</CardTitle>
+                  <div className="mx-auto bg-primary rounded-full p-4 w-fit text-primary-foreground mb-4">
+                      <QrCode className="h-10 w-10" />
+                  </div>
+                  <CardTitle className="font-display text-3xl">Presente em PIX</CardTitle>
                 </CardHeader>
                 <CardContent className="p-8 pt-4 flex flex-col flex-1 items-center">
                     <p className="text-muted-foreground mb-4">
@@ -85,7 +117,7 @@ export function GiftRegistrySection() {
                     </p>
                     <div className="bg-white p-4 rounded-lg shadow-inner mb-4 flex-1 flex items-center justify-center">
                         <Image
-                            src="/pix-qr-code.JPG"
+                            src="/images/pix-qr-code..JPG"
                             alt="QR Code PIX"
                             width={180}
                             height={180}
@@ -93,11 +125,16 @@ export function GiftRegistrySection() {
                         />
                     </div>
                      <p className="text-muted-foreground text-sm mb-4">Ou use a chave "copia e cola":</p>
-                    <Button onClick={handleCopyPixKey} variant="secondary" size="lg" className="rounded-full w-full mt-auto">
+                    <Button onClick={handleCopyPixKey} variant="secondary" size="lg" className="rounded-full w-full">
                         <Copy className="mr-2 h-4 w-4" />
                         Copiar Chave PIX
                     </Button>
-                     <p className="text-xs text-muted-foreground mt-4">Ou use nosso e-mail: <span className="font-semibold text-foreground/80">{pixEmail}</span></p>
+                    
+                     <p className="text-xs text-muted-foreground mt-4">Ou use nosso e-mail:</p>
+                     <Button onClick={handleCopyEmail} variant="ghost" size="sm" className="mt-2">
+                        <span className="font-semibold text-foreground/80">{pixEmail}</span>
+                        <Copy className="ml-2 h-4 w-4" />
+                     </Button>
                 </CardContent>
             </Card>
         </div>
