@@ -29,7 +29,7 @@ export function GiftRegistrySection() {
                 </p>
                 <div className="bg-white p-4 rounded-lg shadow-inner mb-4 flex-1 flex items-center justify-center">
                   <Image
-                    src="/images/gift-list-image.png"
+                    src="/images/trindade-santa-bg.png.png"
                     alt="Ilustração de presentes para casa"
                     width={180}
                     height={180}
