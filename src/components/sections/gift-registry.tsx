@@ -1,10 +1,33 @@
+'use client';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
 import { Gift, QrCode, Copy } from 'lucide-react';
 import Image from 'next/image';
 
+const pixKey = '00020126520014br.gov.bcb.pix0130casamentoeloisaejean@gmail.com5204000053039865802BR5911CAJE33364466009Sao Paulo610901227-20062230519daqr1875194103509586304AF64';
+const pixEmail = 'casamentoeloisaejean@gmail.com';
+
 export function GiftRegistrySection() {
+  const { toast } = useToast();
+
+  const handleCopyPixKey = () => {
+    navigator.clipboard.writeText(pixKey).then(() => {
+      toast({
+        title: 'Chave PIX copiada!',
+        description: 'A chave "copia e cola" está na sua área de transferência.',
+      });
+    }).catch(err => {
+      console.error('Failed to copy PIX key: ', err);
+      toast({
+        variant: 'destructive',
+        title: 'Oops!',
+        description: 'Não foi possível copiar a chave PIX.',
+      });
+    });
+  };
+
   return (
     <div className="container max-w-5xl">
       <div className="text-center mb-10 stagger-item" style={{'--delay': '0ms'} as React.CSSProperties}>
@@ -62,19 +85,19 @@ export function GiftRegistrySection() {
                     </p>
                     <div className="bg-white p-4 rounded-lg shadow-inner mb-4 flex-1 flex items-center justify-center">
                         <Image
-                            // IMPORTANTE: Substitua este link pelo seu QR Code PIX
-                            src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Commons_QR_code.png"
+                            src="/images/pix-qr-code.png"
                             alt="QR Code PIX"
                             width={180}
                             height={180}
                             className="object-contain"
                         />
                     </div>
-                     <p className="text-muted-foreground text-sm mb-4">Ou use a chave aleatória:</p>
-                    <Button variant="secondary" size="lg" className="rounded-full w-full mt-auto">
+                     <p className="text-muted-foreground text-sm mb-4">Ou use a chave "copia e cola":</p>
+                    <Button onClick={handleCopyPixKey} variant="secondary" size="lg" className="rounded-full w-full mt-auto">
                         <Copy className="mr-2 h-4 w-4" />
                         Copiar Chave PIX
                     </Button>
+                     <p className="text-xs text-muted-foreground mt-4">Ou use nosso e-mail: <span className="font-semibold text-foreground/80">{pixEmail}</span></p>
                 </CardContent>
             </Card>
         </div>
