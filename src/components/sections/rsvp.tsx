@@ -123,7 +123,7 @@ export function RsvpSection() {
                 <Textarea id="message" name="message" placeholder="Deixe uma mensagem carinhosa para os noivos..." rows={3} className="bg-background rounded-lg focus:border-primary" onChange={(e) => setMessage(e.target.value)} />
               </div>
               
-              <Button type="submit" disabled={isSubmitting || isUserLoading} size="lg" className="w-full text-lg rounded-full shadow-lg hover:shadow-primary/40 transition-shadow">
+              <Button type="submit" disabled={isSubmitting || isUserLoading} size="lg" className="w-full rounded-full shadow-lg hover:shadow-primary/40 transition-shadow">
                 {isSubmitting ? 'Enviando...' : 'Confirmar Presença e Enviar Mensagem'}
                 <Send className="ml-2 h-5 w-5" />
             </Button>
