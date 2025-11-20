@@ -59,7 +59,7 @@ export function GiftRegistrySection() {
                         />
                     </div>
                      <p className="text-muted-foreground text-sm mb-4">Ou use a chave aleatória:</p>
-                    <Button variant="secondary" size="lg" className="rounded-full w-full">
+                    <Button variant="secondary" size="lg" className="rounded-full w-full mt-auto">
                         <Copy className="mr-2 h-4 w-4" />
                         Copiar Chave PIX
                     </Button>
