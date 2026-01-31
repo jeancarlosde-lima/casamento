@@ -1,133 +1,175 @@
 'use client';
-import { useState, useRef, FormEvent, useEffect } from 'react';
+
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Heart, Send } from 'lucide-react';
-import { useFirestore, useAuth, useUser } from '@/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { initiateAnonymousSignIn } from '@/firebase/non-blocking-login';
+import { Loader2, CheckCircle, Search, UserCheck } from 'lucide-react';
+import { useDebounce } from '@/hooks/use-debounce';
+import { Label } from '@/components/ui/label';
+
+interface Guest {
+    id: string;
+    name: string;
+    party_size: number;
+    isConfirmed?: boolean;
+}
 
 export function RsvpSection() {
   const { toast } = useToast();
-  const formRef = useRef<HTMLFormElement>(null);
-  const [name, setName] = useState('');
-  const [message, setMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const firestore = useFirestore();
-  const auth = useAuth();
-  const { user, isUserLoading } = useUser();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState<Guest[]>([]);
+  const [selectedGuest, setSelectedGuest] = useState<Guest | null>(null);
+  const [status, setStatus] = useState<'idle' | 'searching' | 'confirming' | 'confirmed' | 'error'>('idle');
+  
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
+  const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!user && !isUserLoading) {
-      initiateAnonymousSignIn(auth);
-    }
-  }, [user, isUserLoading, auth]);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setResults([]);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    
-    if (!user) {
-        toast({
-            variant: 'destructive',
-            title: 'Autenticação necessária',
-            description: 'Por favor, aguarde um momento e tente novamente.',
-        });
-        if (!isUserLoading) {
-            initiateAnonymousSignIn(auth);
+
+  useEffect(() => {
+    if (debouncedSearchTerm.length > 2) {
+      const searchGuests = async () => {
+        setStatus('searching');
+        try {
+          const response = await fetch(`/api/guests?search=${debouncedSearchTerm}`);
+          if (response.ok) {
+            const data: Guest[] = await response.json();
+            setResults(data);
+          } else {
+            setResults([]);
+          }
+        } catch (error) {
+          console.error('Search error:', error);
+          setResults([]);
         }
-        return;
+        setStatus('idle');
+      };
+      searchGuests();
+    } else {
+      setResults([]);
     }
-    
-    if (!firestore) {
-      toast({
-        variant: 'destructive',
-        title: 'Erro de conexão',
-        description: 'Não foi possível conectar ao banco de dados. Tente novamente.',
-      });
-      return;
-    }
-    
-    setIsSubmitting(true);
+  }, [debouncedSearchTerm]);
 
+  const handleSelectGuest = (guest: Guest) => {
+    setSelectedGuest(guest);
+    setSearchTerm(guest.name);
+    setResults([]);
+  };
+
+  const handleConfirm = async () => {
+    if (!selectedGuest) return;
+
+    setStatus('confirming');
     try {
-      await addDoc(collection(firestore, 'guest_book_entries'), {
-        name,
-        message,
-        createdAt: serverTimestamp(),
-        uid: user.uid,
+      const response = await fetch('/api/guests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ guestId: selectedGuest.id }),
       });
 
-      toast({
-        title: 'Obrigado!',
-        description: 'Sua mensagem foi enviada com sucesso.',
-      });
-      setIsSubmitted(true);
-      formRef.current?.reset();
+      if (response.ok) {
+        setStatus('confirmed');
+        toast({
+          title: 'Presença Confirmada!',
+          description: `Obrigado, ${selectedGuest.name}! Sua presença foi registrada.`,
+        });
+      } else {
+        throw new Error('Falha ao confirmar presença.');
+      }
     } catch (error) {
-      console.error(error);
+      setStatus('error');
       toast({
         variant: 'destructive',
-        title: 'Oops! Algo deu errado.',
-        description: 'Não foi possível enviar sua mensagem. Tente novamente.',
+        title: 'Erro ao confirmar.',
+        description: 'Não foi possível registrar sua presença. Tente novamente.',
       });
-    } finally {
-      setIsSubmitting(false);
+      setStatus('idle');
     }
   };
-  
-  if (isSubmitted) {
+
+  const resetForm = () => {
+      setStatus('idle');
+      setSelectedGuest(null);
+      setSearchTerm('');
+  }
+
+  if (status === 'confirmed') {
     return (
-      <div className="container max-w-lg text-center">
-        <Card className="shadow-lg p-8 bg-card rounded-2xl">
-            <CardHeader>
-                <div className="mx-auto bg-primary rounded-full p-4 w-fit text-primary-foreground mb-4">
-                    <Heart className="h-10 w-10" />
-                </div>
-                <CardTitle className="font-display text-3xl">Obrigado!</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <p className="text-muted-foreground text-lg">Sua mensagem foi enviada com sucesso!</p>
-                 <Button asChild variant="link" className="mt-4">
-                    <a href="/guestbook">Ver livro de visitas</a>
-                </Button>
-            </CardContent>
-        </Card>
-      </div>
-    );
+        <div className="container max-w-2xl py-20">
+            <Card className="shadow-lg bg-card text-center p-8">
+                <CheckCircle className="h-16 w-16 mx-auto text-green-500 mb-4" />
+                <h3 className="text-2xl font-semibold mb-2">Obrigado, {selectedGuest?.name}!</h3>
+                <p className="text-muted-foreground mb-6">Sua presença foi confirmada com sucesso. Mal podemos esperar para celebrar com você!</p>
+                <Button onClick={resetForm}>Confirmar outro nome</Button>
+            </Card>
+        </div>
+    )
   }
 
   return (
-    <div className="container max-w-lg">
-      <div className="text-center mb-10 stagger-item" style={{'--delay': '0ms'} as React.CSSProperties}>
-          <h2 className="font-display text-4xl md:text-5xl">Confirmar Presença</h2>
-          <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-              Sua presença é o maior presente que podemos receber. Por favor, confirme sua participação e deixe uma mensagem em nosso livro de visitas.
-          </p>
-      </div>
-      <Card className="shadow-lg bg-card rounded-2xl stagger-item" style={{'--delay': '150ms'} as React.CSSProperties}>
-        <CardContent className="p-8">
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="name">Nome Completo</Label>
-                <Input id="name" name="name" placeholder="Seu nome completo" required className="bg-background rounded-lg focus:border-primary" onChange={(e) => setName(e.target.value)} />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="message">Deixe sua mensagem</Label>
-                <Textarea id="message" name="message" placeholder="Deixe uma mensagem carinhosa para os noivos..." rows={3} className="bg-background rounded-lg focus:border-primary" onChange={(e) => setMessage(e.target.value)} />
-              </div>
-              
-              <Button type="submit" disabled={isSubmitting || isUserLoading} size="lg" className="w-full rounded-full shadow-lg hover:shadow-primary/40 transition-shadow">
-                {isSubmitting ? 'Enviando...' : 'Confirmar Presença e Enviar Mensagem'}
-                <Send className="ml-2 h-5 w-5" />
-            </Button>
-            </form>
+    <div className="container max-w-2xl py-20">
+      <Card className="shadow-lg bg-card">
+        <CardHeader className="text-center">
+          <CardTitle className="font-display text-4xl">Confirme sua Presença</CardTitle>
+          <CardDescription className="pt-2">Digite seu nome para encontrar seu convite e confirmar.</CardDescription>
+        </CardHeader>
+        <CardContent>
+            <div className="grid gap-4">
+                <div className="relative" ref={searchRef}>
+                    <Label htmlFor="name-search" className="sr-only">Seu nome</Label>
+                    <div className="relative">
+                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                         <Input
+                            id="name-search"
+                            placeholder="Digite seu primeiro nome..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            disabled={status === 'confirming' || !!selectedGuest}
+                            className="pl-10 h-12"
+                        />
+                         {status === 'searching' && <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 animate-spin" />}
+                    </div>
+                   
+                    {results.length > 0 && (
+                        <ul className="absolute z-10 w-full mt-2 bg-card border rounded-md shadow-lg max-h-60 overflow-y-auto">
+                            {results.map((guest) => (
+                                <li key={guest.id} onClick={() => handleSelectGuest(guest)} 
+                                    className="px-4 py-3 cursor-pointer hover:bg-primary/10 flex justify-between items-center">
+                                    <span>{guest.name}</span>
+                                    {guest.isConfirmed && <span className="text-xs text-green-500 flex items-center"><UserCheck className="h-4 w-4 mr-1"/> Já Confirmado</span>}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+                 {selectedGuest && (
+                    <div className="p-4 bg-primary/10 rounded-lg text-center">
+                        <p className="font-semibold text-lg">{selectedGuest.name}</p>
+                        <p className="text-sm text-muted-foreground">Convite para {selectedGuest.party_size} pessoa(s).</p>
+                    </div>
+                )}
+                <Button onClick={handleConfirm} disabled={!selectedGuest || status === 'confirming'} size="lg" className="h-12">
+                    {status === 'confirming' ? (
+                    <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Confirmando...
+                    </> 
+                    ) : (
+                    'Confirmar Presença'
+                    )}
+              </Button>
+            </div>
         </CardContent>
       </Card>
     </div>

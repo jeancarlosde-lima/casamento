@@ -1,183 +1,194 @@
 'use client';
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { collection, query, orderBy } from 'firebase/firestore';
-import { useCollection, useFirestore, useUser, useAuth, useMemoFirebase } from '@/firebase';
-import { initiateAnonymousSignIn } from '@/firebase/non-blocking-login';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import HTMLFlipBook from 'react-pageflip';
+
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight, BookOpen } from 'lucide-react';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/hooks/use-toast';
+import { Loader2, MessageSquare, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { format } from 'date-fns';
 
-interface GuestBookEntry {
-  id: string;
-  name: string;
-  message: string;
-  createdAt: {
-    seconds: number;
-    nanoseconds: number;
+interface GuestbookMessage {
+    id: string;
+    name: string;
+    message: string;
+    createdAt: any;
+}
+
+export default function GuestbookPage() {
+  const { toast } = useToast();
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState<GuestbookMessage[]>([]);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [isLoadingMessages, setIsLoadingMessages] = useState(true);
+
+  const fetchMessages = async () => {
+    setIsLoadingMessages(true);
+    try {
+        const response = await fetch('/api/guestbook');
+        if(response.ok) {
+            const data = await response.json();
+            setMessages(data);
+        } else {
+            console.error('Failed to fetch messages');
+             toast({
+                variant: 'destructive',
+                title: 'Erro ao carregar recados',
+                description: 'Não foi possível buscar os recados. A página pode não funcionar como esperado.',
+            });
+        }
+    } catch (error) {
+        console.error('Error fetching messages:', error);
+        toast({
+            variant: 'destructive',
+            title: 'Erro de conexão',
+            description: 'Não foi possível conectar ao servidor para buscar os recados.',
+        });
+    } finally {
+        setIsLoadingMessages(false);
+    }
   };
-}
 
-function getInitials(name: string) {
-  const names = name.split(' ');
-  if (names.length > 1) {
-    return `${names[0][0]}${names[names.length - 1][0]}`.toUpperCase();
-  }
-  return name.substring(0, 2).toUpperCase();
-}
+  useEffect(() => {
+    fetchMessages();
+  }, []);
 
-const Page = React.forwardRef<HTMLDivElement, { children: React.ReactNode, number: number }>((props, ref) => {
-    return (
-        <div className="page" ref={ref}>
-            <div className="page-content">
-                {props.children}
-                <div className="page-footer">
-                    <p>{props.number + 1}</p>
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!name.trim() || !message.trim()) {
+      toast({
+        variant: 'destructive',
+        title: 'Oops! Campos obrigatórios.',
+        description: 'Por favor, preencha seu nome e a mensagem.',
+      });
+      return;
+    }
+
+    setStatus('loading');
+
+    try {
+      const response = await fetch('/api/guestbook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, message }),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        toast({ title: 'Recado enviado!', description: 'Obrigado por deixar sua mensagem.' });
+        setName('');
+        setMessage('');
+        fetchMessages(); // Refresh messages list
+        setStatus('idle');
+      } else {
+        throw new Error('Falha ao enviar o recado.');
+      }
+    } catch (error) {
+      setStatus('error');
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao enviar.',
+        description: 'Não foi possível enviar seu recado. Por favor, tente novamente.',
+      });
+    }
+  };
+
+  return (
+    <div className="bg-background min-h-screen">
+        <div className="container max-w-4xl mx-auto py-12 px-4">
+            <div className="flex items-center mb-8">
+                <Button asChild variant="ghost" size="icon" className="mr-4">
+                    <Link href="/">
+                        <ArrowLeft className="h-5 w-5" />
+                    </Link>
+                </Button>
+                <h1 className="font-display text-4xl md:text-5xl text-foreground">Livro de Recados</h1>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-12">
+                {/* Form Section */}
+                <div className="md:order-2">
+                    <Card className="shadow-lg bg-card">
+                        <CardHeader>
+                        <CardTitle className="font-display text-3xl flex items-center">
+                            <MessageSquare className="mr-3 h-7 w-7"/>
+                            Deixe seu Recado
+                        </CardTitle>
+                        <CardDescription>Sua mensagem ficará registrada para sempre em nossa história.</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <form onSubmit={handleSubmit} className="grid gap-6">
+                                <div className="grid gap-2">
+                                    <Label htmlFor="name">Seu nome</Label>
+                                    <Input
+                                    id="name"
+                                    placeholder="Como devemos te chamar?"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    disabled={status === 'loading'}
+                                    required
+                                    />
+                                </div>
+                                <div className="grid gap-2">
+                                    <Label htmlFor="message">Sua mensagem</Label>
+                                    <Textarea
+                                    id="message"
+                                    placeholder="Escreva aqui suas felicitações, lembranças ou conselhos..."
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
+                                    disabled={status === 'loading'}
+                                    required
+                                    rows={5}
+                                    />
+                                </div>
+                                <Button type="submit" disabled={status === 'loading'} size="lg">
+                                    {status === 'loading' ? (
+                                    <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Enviando...
+                                    </> 
+                                    ) : (
+                                    'Enviar Mensagem'
+                                    )}
+                                </Button>
+                            </form>
+                        </CardContent>
+                    </Card>
+                </div>
+
+                {/* Messages List Section */}
+                <div className="md:order-1">
+                    <h2 className="font-display text-3xl text-foreground mb-6">Recados Recebidos</h2>
+                    {isLoadingMessages ? (
+                         <div className="flex items-center justify-center py-10">
+                            <Loader2 className="h-8 w-8 animate-spin text-primary"/>
+                            <span className="ml-4 text-muted-foreground">Carregando recados...</span>
+                        </div>
+                    ) : messages.length > 0 ? (
+                        <div className="space-y-6 max-h-[80vh] overflow-y-auto pr-4">
+                            {messages.map((msg) => (
+                                <Card key={msg.id} className="bg-card/50 shadow-sm transition-transform hover:scale-[1.02]">
+                                    <CardContent className="p-6">
+                                        <p className="text-foreground mb-4 break-words">{msg.message}</p>
+                                        <div className="flex items-center justify-between text-sm text-muted-foreground">
+                                            <p className="font-semibold text-primary">- {msg.name}</p>
+                                            <p>{msg.createdAt ? format(new Date(msg.createdAt.seconds * 1000), "dd/MM/yyyy 'às' HH:mm") : ''}</p>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="text-center py-10 border-2 border-dashed rounded-lg">
+                            <p className="text-muted-foreground">Nenhum recado ainda.</p>
+                            <p className="text-sm text-muted-foreground/80">Seja o primeiro a deixar uma mensagem!</p>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
-    );
-});
-Page.displayName = 'Page';
-
-const PageCover = React.forwardRef<HTMLDivElement, { children: React.ReactNode }>((props, ref) => {
-    return (
-        <div className="page page-cover" ref={ref}>
-            <div className="page-cover-content">
-                {props.children}
-            </div>
-        </div>
-    );
-});
-PageCover.displayName = 'PageCover';
-
-
-export default function GuestbookPage() {
-  const firestore = useFirestore();
-  const auth = useAuth();
-  const { user, isUserLoading } = useUser();
-  const bookRef = useRef<any>(null);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-
-  const guestbookQuery = useMemoFirebase(() => {
-    if (!firestore) return null;
-    return query(
-        collection(firestore, 'guest_book_entries'),
-        orderBy('createdAt', 'desc')
-    );
-  }, [firestore]);
-
-  const { data: rsvps, isLoading } = useCollection<GuestBookEntry>(guestbookQuery);
-
-  useEffect(() => {
-    if (!user && !isUserLoading) {
-      initiateAnonymousSignIn(auth);
-    }
-  }, [user, isUserLoading, auth]);
-
-  useEffect(() => {
-    if (rsvps) {
-        setTotalPages(rsvps.length > 0 ? rsvps.length + 1 : 1); // +1 for the cover
-    }
-  }, [rsvps]);
-
-  const handlePageFlip = (e: { data: number }) => {
-    setCurrentPage(e.data);
-  };
-
-  const goToNextPage = () => {
-    bookRef.current?.pageFlip()?.flipNext();
-  };
-
-  const goToPrevPage = () => {
-    bookRef.current?.pageFlip()?.flipPrev();
-  };
-  
-  const bookWidth = 500;
-  const bookHeight = 650;
-
-  return (
-    <div className="bg-background min-h-screen flex flex-col items-center justify-center p-4">
-        <div className="text-center my-8 md:my-12">
-            <h1 className="font-display text-4xl md:text-6xl text-foreground">Livro de Visitas</h1>
-            <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
-                Vire as páginas para ler as mensagens de carinho.
-            </p>
-        </div>
-
-        {isLoading ? (
-            <div className="flex items-center justify-center" style={{ width: `${bookWidth}px`, height: `${bookHeight}px` }}>
-                <Skeleton className="w-full h-full rounded-lg" />
-            </div>
-        ) : (
-          <div className="flex flex-col items-center">
-            <div 
-                className="flip-book" 
-                style={{ width: '100%', maxWidth: `${bookWidth}px`, height: `${bookHeight}px`}}
-            >
-              {rsvps && (
-                <HTMLFlipBook
-                    width={bookWidth}
-                    height={bookHeight}
-                    size="stretch"
-                    minWidth={300}
-                    maxWidth={bookWidth}
-                    minHeight={400}
-                    maxHeight={bookHeight}
-                    maxShadowOpacity={0.5}
-                    showCover={true}
-                    mobileScrollSupport={true}
-                    onFlip={handlePageFlip}
-                    ref={bookRef}
-                    className="mx-auto"
-                >
-                    <PageCover>
-                        <BookOpen className="h-24 w-24 text-primary" />
-                        <h2 className="font-display text-3xl mt-4 text-foreground">Mensagens</h2>
-                        <p className="text-muted-foreground mt-2">de nossos queridos convidados</p>
-                        <p className="font-display text-4xl text-primary mt-8">Eloisa & Jean</p>
-                    </PageCover>
-
-                    {rsvps.map((rsvp, index) => (
-                        <Page key={rsvp.id} number={index + 1}>
-                             <div className="page-header">
-                                <Avatar>
-                                    <AvatarFallback>{getInitials(rsvp.name)}</AvatarFallback>
-                                </Avatar>
-                                <div className="flex-1">
-                                    <p className="font-semibold text-foreground text-lg">{rsvp.name}</p>
-                                    <p className="text-xs text-muted-foreground/80">
-                                        {new Date(rsvp.createdAt.seconds * 1000).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
-                                    </p>
-                                </div>
-                            </div>
-                            {rsvp.message && (
-                                <p className="text-muted-foreground italic text-base leading-relaxed">"{rsvp.message}"</p>
-                            )}
-                        </Page>
-                    ))}
-                </HTMLFlipBook>
-              )}
-            </div>
-             <div className="flex items-center justify-center gap-4 mt-8">
-                <Button onClick={goToPrevPage} disabled={currentPage === 0} variant="outline" size="icon">
-                    <ChevronLeft className="h-6 w-6" />
-                </Button>
-                <span className="text-muted-foreground font-medium">
-                    Página {currentPage} de {totalPages > 0 ? totalPages -1 : 0}
-                </span>
-                <Button onClick={goToNextPage} disabled={currentPage >= totalPages - 1} variant="outline" size="icon">
-                    <ChevronRight className="h-6 w-6" />
-                </Button>
-            </div>
-            <Button asChild variant="link" className="mt-8">
-                <Link href="/">Voltar para o início</Link>
-            </Button>
-          </div>
-        )}
-      </div>
+    </div>
   );
 }
