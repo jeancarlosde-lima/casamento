@@ -16,7 +16,7 @@ const navItems = [
   { id: 'guestbook', title: 'Livro de Visitas', href: '/guestbook' },
 ];
 
-function NavLinks({ activeSection, onLinkClick, isMobile = false }: { activeSection: string, onLinkClick?: (id: string) => void, isMobile?: boolean }) {
+function NavLinks({ activeSection, onLinkClick, isMobile = false, isClient = false }: { activeSection: string, onLinkClick?: (id: string) => void, isMobile?: boolean, isClient?: boolean }) {
     
     const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, item: (typeof navItems)[0]) => {
         if (item.href) {
@@ -53,13 +53,13 @@ function NavLinks({ activeSection, onLinkClick, isMobile = false }: { activeSect
                     >
                         <div className={cn(
                             'flex-shrink-0 rounded-full bg-primary transition-all duration-300',
-                            activeSection === item.id ? 'w-3 h-3' : 'w-2 h-2 bg-primary/40 group-hover:bg-primary group-hover:scale-110'
+                            isClient && activeSection === item.id ? 'w-3 h-3' : 'w-2 h-2 bg-primary/40 group-hover:bg-primary group-hover:scale-110'
                         )}></div>
 
                         {isMobile ? (
                              <span className={cn(
                                 'font-poppins',
-                                activeSection === item.id ? 'text-primary font-bold' : 'text-foreground/60 group-hover:text-primary'
+                                isClient && activeSection === item.id ? 'text-primary font-bold' : 'text-foreground/60 group-hover:text-primary'
                             )}>
                                 {item.title}
                             </span>
@@ -80,6 +80,11 @@ function NavLinks({ activeSection, onLinkClick, isMobile = false }: { activeSect
 export function SideNav() {
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleMobileLinkClick = () => {
     setIsMobileMenuOpen(false);
@@ -132,7 +137,7 @@ export function SideNav() {
     <>
       {/* Desktop Navigation */}
       <nav className="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden md:block">
-        <NavLinks activeSection={activeSection} />
+        <NavLinks activeSection={activeSection} isClient={isClient} />
       </nav>
 
       {/* Mobile Navigation */}
@@ -156,7 +161,7 @@ export function SideNav() {
                        </SheetClose>
                     </SheetHeader>
                     <div className="p-4">
-                      <NavLinks activeSection={activeSection} onLinkClick={handleMobileLinkClick} isMobile={true} />
+                      <NavLinks activeSection={activeSection} onLinkClick={handleMobileLinkClick} isMobile={true} isClient={isClient} />
                     </div>
                     <div className="mt-auto text-center p-6 bg-background/50">
                         <p className="font-display text-3xl text-primary">Eloisa &amp; Jean</p>
