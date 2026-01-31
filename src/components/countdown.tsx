@@ -45,19 +45,30 @@ function formatCountdown() {
 }
 
 export function Countdown() {
-    const [countdown, setCountdown] = useState<string | null>(null);
+    const [countdown, setCountdown] = useState('');
+    const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
+      // This effect runs only on the client, after the initial render.
+      setIsClient(true);
       setCountdown(formatCountdown());
+
       const timer = setInterval(() => {
         setCountdown(formatCountdown());
       }, 1000 * 60); // Update every minute
+      
       return () => clearInterval(timer);
     }, []);
 
+    if (!isClient) {
+        // On the server, and on the initial client render, render a placeholder.
+        return <p className="mt-2 text-primary text-xl font-poppins font-semibold min-h-[28px]">&nbsp;</p>;
+    }
+
+    // After the component has mounted on the client, render the actual countdown.
     return (
         <p className="mt-2 text-primary text-xl font-poppins font-semibold min-h-[28px]">
-            {countdown ?? <>&nbsp;</>}
+            {countdown}
         </p>
     );
 }
