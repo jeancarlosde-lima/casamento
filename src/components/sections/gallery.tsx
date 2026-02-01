@@ -32,6 +32,8 @@ export function GallerySection() {
         emblaApi.on('select', onSelect);
         emblaApi.on('reInit', onSelect);
     }, [emblaApi, onSelect]);
+    
+    const showGallery = false; // Set to true to show the gallery
 
     return (
         <div className="container">
@@ -41,7 +43,7 @@ export function GallerySection() {
                     Alguns momentos de nossa história.
                 </p>
             </div>
-            {galleryItems.gallery.length > 0 ? (
+            {showGallery && galleryItems.gallery.length > 0 ? (
                 <div className="embla group/gallery">
                     <div className="embla__viewport" ref={emblaRef}>
                         <div className="embla__container">
@@ -87,8 +89,9 @@ export function GallerySection() {
                     </Button>
                 </div>
             ) : (
-                <div className="text-center">
-                    <p className="text-muted-foreground">Em breve, compartilharemos nossas fotos aqui.</p>
+                <div className="text-center py-10 border-2 border-dashed rounded-2xl bg-card/50">
+                    <p className="text-lg font-semibold text-foreground">Galeria em Construção</p>
+                    <p className="mt-2 text-muted-foreground">Em breve, compartilharemos os momentos mais especiais de nossa história aqui.</p>
                 </div>
             )}
 
