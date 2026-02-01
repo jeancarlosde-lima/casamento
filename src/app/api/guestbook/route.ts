@@ -1,11 +1,22 @@
 // src/app/api/guestbook/route.ts
 import { firebaseConfig } from '@/firebase/config';
-import { initializeApp, getApps, getApp } from 'firebase/app';
+import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app';
 import { getFirestore, addDoc, collection, getDocs, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 
-// Initialize Firebase App
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+// Robust Firebase initialization for both local and App Hosting environments
+let app: FirebaseApp;
+if (!getApps().length) {
+  try {
+    // For App Hosting, env vars are automatically picked up by initializeApp()
+    app = initializeApp();
+  } catch (e) {
+    // Fallback for local development
+    app = initializeApp(firebaseConfig);
+  }
+} else {
+  app = getApp();
+}
 const db = getFirestore(app);
 
 
