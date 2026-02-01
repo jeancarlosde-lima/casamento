@@ -1,15 +1,20 @@
-'use client';
-import { db } from '@/lib/firebase';
+import { firebaseConfig } from '@/firebase/config';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import {
+  getFirestore,
   collection,
   query,
   where,
   getDocs,
   doc,
   updateDoc,
-  writeBatch,
+  serverTimestamp,
 } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
+
+// Initialize Firebase App
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+const db = getFirestore(app);
 
 // Função para buscar convidados
 export async function GET(request: Request) {
@@ -54,7 +59,7 @@ export async function POST(request: Request) {
     const guestRef = doc(db, 'guests', guestId);
     await updateDoc(guestRef, {
       isConfirmed: true,
-      confirmedAt: new Date(),
+      confirmedAt: serverTimestamp(),
     });
 
     return NextResponse.json({ message: 'Presença confirmada com sucesso!' }, { status: 200 });

@@ -1,7 +1,13 @@
 // src/app/api/guestbook/route.ts
-import { db } from '@/lib/firebase';
-import { addDoc, collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { firebaseConfig } from '@/firebase/config';
+import { initializeApp, getApps, getApp } from 'firebase/app';
+import { getFirestore, addDoc, collection, getDocs, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
+
+// Initialize Firebase App
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+const db = getFirestore(app);
+
 
 export async function POST(request: Request) {
   try {
@@ -14,7 +20,7 @@ export async function POST(request: Request) {
     const docRef = await addDoc(collection(db, "guestbook"), {
       name: name,
       message: message,
-      createdAt: new Date(),
+      createdAt: serverTimestamp(),
     });
 
     return NextResponse.json({ message: "Recado recebido com sucesso!", id: docRef.id }, { status: 201 });
