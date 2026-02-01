@@ -6,7 +6,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { Button } from '../ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-// import galleryItems from '@/lib/placeholder-images.json';
+import galleryItems from '@/lib/placeholder-images.json';
 
 
 export function GallerySection() {
@@ -32,8 +32,6 @@ export function GallerySection() {
         emblaApi.on('select', onSelect);
         emblaApi.on('reInit', onSelect);
     }, [emblaApi, onSelect]);
-
-    const galleryItems = { gallery: [] };
 
     return (
         <div className="container">
