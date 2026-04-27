@@ -1,37 +1,51 @@
-# Eloisa & Jean - Convite de Casamento Digital
+# Digital Wedding Invitation Platform
 
-Este é o repositório do convite de casamento digital de Eloisa & Jean, desenvolvido com tecnologias web modernas para criar uma experiência elegante e interativa para os convidados.
+Uma plataforma digital de convite de casamento de alto padrão, projetada para oferecer uma experiência de usuário excepcional (UX) através de um design moderno, performance otimizada e segurança de dados.
 
-## Tecnologias Utilizadas
+## 🏛 Arquitetura e Tecnologias
 
-O projeto foi construído utilizando um conjunto de ferramentas modernas e eficientes, focadas em performance e qualidade de desenvolvimento:
+A aplicação foi construída sob uma arquitetura moderna baseada em componentes de servidor (Server-Side Rendering e React Server Components), garantindo tempo de carregamento otimizado e SEO aprimorado.
 
-*   **Framework Principal:** **Next.js (App Router)** - Utilizamos a versão mais recente do Next.js com o App Router para uma arquitetura baseada em componentes de servidor (React Server Components).
-*   **Linguagem:** **TypeScript** - Para garantir um código robusto, seguro e de fácil manutenção.
-*   **Biblioteca de UI:** **React** - A base para a construção de toda a interface de usuário interativa.
-*   **Componentes de UI:** **shadcn/ui** - Uma coleção de componentes de alta qualidade, acessíveis e estilizados com Tailwind CSS.
-*   **Estilização:** **Tailwind CSS** - Para estilização rápida e consistente.
-*   **Fontes:** **Google Fonts (`next/font`)** - As fontes `Playfair Display`, `Aboreto` e `Poppins` foram importadas e otimizadas.
-*   **Inteligência Artificial:** **Genkit** - Configurado para uso de IA do Google para funcionalidades como o "Assistente de Viagem".
-*   **Hospedagem:** **Firebase App Hosting** - A aplicação está configurada para deploy automático no Firebase App Hosting ao realizar push para a branch principal no GitHub.
+- **Core Framework:** Next.js 15 (App Router)
+- **Linguagem:** TypeScript (Strict Mode) para segurança de tipagem e manutenibilidade em escala.
+- **Interface e Componentes:** 
+  - React 18
+  - `shadcn/ui` para componentes base acessíveis (WAI-ARIA compliant).
+  - Estilização utilitária via Tailwind CSS, com suporte a temas e consistência de design system.
+- **Integração de IA:** Google Genkit para fluxos automatizados e suporte ao "Assistente de Viagem".
+- **Hospedagem e CI/CD:** Firebase App Hosting, permitindo integrações contínuas e deploys otimizados direto do repositório GitHub.
 
----
+## 🛡️ Segurança e Privacidade
 
-## Segurança e Privacidade
+Seguindo as melhores práticas de Red Teaming e segurança de front-end:
+- **Proteção de Dados Sensíveis:** Chaves transacionais (como chaves PIX e endereços de e-mail) não são expostas no HTML estático ou em código fonte legível.
+- **Ofuscação Dinâmica:** Os dados de contato e doações são criptografados em tempo de compilação (Base64) e decodificados estritamente em tempo de execução via interação do usuário, prevenindo a extração automatizada por web scrapers e bots maliciosos.
 
-Durante a última atualização, implementamos melhorias críticas de segurança:
-*   **Ofuscação de Dados:** A Chave PIX e o endereço de E-mail de contato foram ofuscados utilizando criptografia Base64. Eles não ficam mais visíveis no código-fonte, prevenindo o acesso por bots ou *scrapers* e evitando potenciais golpes ou spam.
-*   **Interação Segura:** Os dados só são decodificados em tempo de execução quando o usuário final interage diretamente com os botões da interface para copiá-los.
+## 🎨 Design System e Usabilidade
 
----
+- **Tipografia:** Implementação das fontes *Playfair Display* e *Aboreto* via `next/font` para garantir layout contínuo (zero Cumulative Layout Shift - CLS).
+- **Acessibilidade e Fitts's Law:** Áreas de toque aumentadas em dispositivos móveis, transições suaves de estado (hovers e focus) e suporte a navegação por teclado.
+- **Composição Visual:** Adoção de grid orgânico e regra de paleta de cores (60-30-10) para criar um ambiente digital sofisticado e sem atrito.
 
-## Deploy
+## 🚀 Instalação e Execução Local
 
-O projeto é hospedado via **Firebase App Hosting**. Para atualizar o site em produção (`casamentoeloisaejean.com.br`), basta enviar o código atualizado para o GitHub:
+```bash
+# Instalar as dependências
+npm install
+
+# Iniciar o servidor de desenvolvimento
+npm run dev
+```
+
+A aplicação estará disponível em `http://localhost:9002`.
+
+## 📦 Deploy
+
+Este projeto está configurado via Firebase App Hosting.
+O processo de CI/CD é acionado automaticamente a cada commit enviado para a branch `main`.
 
 ```bash
 git add .
-git commit -m "sua mensagem"
-git push origin master
+git commit -m "feat: sua mensagem descritiva"
+git push origin main
 ```
-O Firebase detectará a mudança no repositório `jeancarlosde-lima/casamento` e fará o build e o deploy automaticamente.
