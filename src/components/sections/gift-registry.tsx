@@ -6,8 +6,8 @@ import { useToast } from '@/hooks/use-toast';
 import { Gift, QrCode, Copy } from 'lucide-react';
 import Image from 'next/image';
 
-const pixKey = '00020126520014br.gov.bcb.pix0130casamentoeloisaejean@gmail.com5204000053039865802BR5911CAJE33364466009Sao Paulo610901227-20062230519daqr1875194103509586304AF64';
-const pixEmail = 'casamentoeloisaejean@gmail.com';
+const getPixKey = () => typeof window !== 'undefined' ? window.atob('MDAwMjAxMjY1MjAwMTRici5nb3YuYmNiLnBpeDAxMzBjYXNhbWVudG9lbG9pc2FlamVhbkBnbWFpbC5jb201MjA0MDAwMDUzMDM5ODY1ODAyQlI1OTExQ0FKRTMzMzY0NDY2MDA5U2FvIFBhdWxvNjEwOTAxMjI3LTIwMDYyMjMwNTE5ZGFxcjE4NzUxOTQxMDM1MDk1ODYzMDRBRjY0') : '';
+const getPixEmail = () => typeof window !== 'undefined' ? window.atob('Y2FzYW1lbnRvZWxvaXNhZWplYW5AZ21haWwuY29t') : '';
 
 export function GiftRegistrySection() {
   const { toast } = useToast();
@@ -53,11 +53,11 @@ export function GiftRegistrySection() {
   };
 
   const handleCopyPixKey = () => {
-    copyToClipboard(pixKey, 'Chave PIX copiada!');
+    copyToClipboard(getPixKey(), 'Chave PIX copiada!');
   };
 
   const handleCopyEmail = () => {
-    copyToClipboard(pixEmail, 'E-mail copiado!');
+    copyToClipboard(getPixEmail(), 'E-mail copiado!');
   };
 
   return (
@@ -130,9 +130,9 @@ export function GiftRegistrySection() {
                         Copiar Chave PIX
                     </Button>
                     
-                     <p className="text-xs text-muted-foreground mt-4">Ou use nosso e-mail:</p>
-                     <Button onClick={handleCopyEmail} variant="ghost" size="sm" className="mt-2">
-                        <span className="font-semibold text-foreground/80">{pixEmail}</span>
+                     <p className="text-xs text-muted-foreground mt-4">Ou use nossa chave E-mail:</p>
+                     <Button onClick={handleCopyEmail} variant="ghost" size="sm" className="mt-2 hover:bg-primary/10 transition-colors duration-200">
+                        <span className="font-semibold text-foreground/80">Copiar E-mail PIX</span>
                         <Copy className="ml-2 h-4 w-4" />
                      </Button>
                 </CardContent>
