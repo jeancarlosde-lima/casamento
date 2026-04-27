@@ -44,7 +44,7 @@ export function RsvpSection() {
       const searchGuests = async () => {
         setStatus('searching');
         try {
-          const response = await fetch(`/api/guests?search=${debouncedSearchTerm}`);
+          const response = await fetch(`/api/guests?search=${encodeURIComponent(debouncedSearchTerm)}`);
           if (response.ok) {
             const data: Guest[] = await response.json();
             setResults(data);
