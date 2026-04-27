@@ -6,58 +6,101 @@ import { useToast } from '@/hooks/use-toast';
 import { Gift, QrCode, Copy } from 'lucide-react';
 import Image from 'next/image';
 
-const getPixKey = () => typeof window !== 'undefined' ? window.atob('MDAwMjAxMjY1MjAwMTRici5nb3YuYmNiLnBpeDAxMzBjYXNhbWVudG9lbG9pc2FlamVhbkBnbWFpbC5jb201MjA0MDAwMDUzMDM5ODY1ODAyQlI1OTExQ0FKRTMzMzY0NDY2MDA5U2FvIFBhdWxvNjEwOTAxMjI3LTIwMDYyMjMwNTE5ZGFxcjE4NzUxOTQxMDM1MDk1ODYzMDRBRjY0') : '';
-const getPixEmail = () => typeof window !== 'undefined' ? window.atob('Y2FzYW1lbnRvZWxvaXNhZWplYW5AZ21haWwuY29t') : '';
+/**
+ * Decodifica a chave PIX (código EMV completo) a partir de base64.
+ * Usa try/catch para evitar falhas silenciosas.
+ */
+const decodePixKey = (): string => {
+  try {
+    if (typeof window === 'undefined') return '';
+    return window.atob('MDAwMjAxMjY1MjAwMTRici5nb3YuYmNiLnBpeDAxMzBjYXNhbWVudG9lbG9pc2FlamVhbkBnbWFpbC5jb201MjA0MDAwMDUzMDM5ODY1ODAyQlI1OTExQ0FKRTMzMzY0NDY2MDA5U2FvIFBhdWxvNjEwOTAxMjI3LTIwMDYyMjMwNTE5ZGFxcjE4NzUxOTQxMDM1MDk1ODYzMDRBRjY0');
+  } catch {
+    console.error('Erro ao decodificar chave PIX');
+    return '';
+  }
+};
+
+/**
+ * Decodifica o e-mail PIX a partir de base64.
+ */
+const decodePixEmail = (): string => {
+  try {
+    if (typeof window === 'undefined') return '';
+    return window.atob('Y2FzYW1lbnRvZWxvaXNhZWplYW5AZ21haWwuY29t');
+  } catch {
+    console.error('Erro ao decodificar e-mail PIX');
+    return '';
+  }
+};
 
 export function GiftRegistrySection() {
   const { toast } = useToast();
 
-  const copyFallback = (text: string, successMessage: string) => {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    textArea.style.position = 'fixed';
-    textArea.style.top = '-9999px';
-    textArea.style.left = '-9999px';
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
+  /**
+   * Copia texto para a área de transferência usando o método moderno (Clipboard API)
+   * com fallback para o método legado (execCommand) caso falhe.
+   */
+  const copyToClipboard = async (text: string, successMessage: string) => {
+    // Verificação: se a chave está vazia, avisa o usuário
+    if (!text) {
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao copiar',
+        description: 'Não foi possível obter os dados. Tente novamente.',
+      });
+      return;
+    }
+
+    // Tenta o método moderno primeiro
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text);
+        toast({ title: successMessage });
+        return;
+      } catch (err) {
+        console.warn('Clipboard API falhou, tentando método alternativo:', err);
+      }
+    }
+
+    // Fallback: método legado com textarea oculta
     try {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      // Posiciona fora da tela para não ser visível
+      textArea.style.position = 'fixed';
+      textArea.style.top = '-9999px';
+      textArea.style.left = '-9999px';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+
       const successful = document.execCommand('copy');
+      document.body.removeChild(textArea);
+
       if (successful) {
         toast({ title: successMessage });
       } else {
-        throw new Error('Copy command was not successful');
+        throw new Error('execCommand copy falhou');
       }
     } catch (err) {
-      console.error('Fallback copy method failed: ', err);
+      console.error('Todos os métodos de cópia falharam:', err);
       toast({
         variant: 'destructive',
-        title: 'Oops! Não foi possível copiar.',
-        description: 'Seu navegador pode estar bloqueando esta ação. Por favor, copie manualmente.',
+        title: 'Não foi possível copiar',
+        description: 'Tente pressionar e segurar o botão, ou copie manualmente.',
       });
-    }
-    document.body.removeChild(textArea);
-  }
-
-  const copyToClipboard = (text: string, successMessage: string) => {
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(() => {
-        toast({ title: successMessage });
-      }).catch(err => {
-        console.warn('navigator.clipboard failed, trying fallback: ', err);
-        copyFallback(text, successMessage);
-      });
-    } else {
-      copyFallback(text, successMessage);
     }
   };
 
   const handleCopyPixKey = () => {
-    copyToClipboard(getPixKey(), 'Chave PIX copiada!');
+    const key = decodePixKey();
+    copyToClipboard(key, 'Chave PIX copiada! Cole no app do seu banco.');
   };
 
   const handleCopyEmail = () => {
-    copyToClipboard(getPixEmail(), 'E-mail copiado!');
+    const email = decodePixEmail();
+    copyToClipboard(email, 'E-mail PIX copiado!');
   };
 
   return (
